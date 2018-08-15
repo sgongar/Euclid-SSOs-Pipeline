@@ -113,6 +113,20 @@ class TestAllSame(TestCase):
 
         return statement_1 and statement_2 and statement_3
 
+    def test_there_are_three_values_sources_and_false_values(self):
+        """
+
+        :return: (False, 0)
+        """
+        sources_list = [1, 2, 'False']
+        output = misc.all_same(sources_list)
+
+        statement_1 = self.assertIs(type(output), tuple)
+        statement_2 = self.assertFalse(output[0])
+        statement_3 = self.assertIs(output[1], 0)
+
+        return statement_1 and statement_2 and statement_3
+
     def test_there_is_an_empty_list(self):
         """
 
