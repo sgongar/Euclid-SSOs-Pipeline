@@ -269,14 +269,9 @@ def extract_settings_elvis():
 
     if os_version == 'centos':
         prfs_d['version'] = confmap(cf, "Version")['centos_version']
-    elif os_version == 'cab':
-        prfs_d['version'] = confmap(cf, "Version")['cab_version']
-    else:
-        raise BadSettings('Operative system not chosen')
-
-    if os_version == 'centos':
         prfs_d['home'] = confmap(cf, "HomeDirs")['centos_home']
     elif os_version == 'cab':
+        prfs_d['version'] = confmap(cf, "Version")['cab_version']
         prfs_d['home'] = confmap(cf, "HomeDirs")['cab_home']
     else:
         raise BadSettings('Operative system not chosen')
@@ -338,25 +333,18 @@ def extract_settings():
 
     if os_version == 'fedora':
         prfs_d['home'] = confmap(cf, "HomeDirs")['fed_home']
-    elif os_version == 'ubuntu':
-        prfs_d['home'] = confmap(cf, "HomeDirs")['ub_home']
-    elif os_version == 'test':
-        prfs_d['home'] = confmap(cf, "HomeDirs")['test_home']
-    elif os_version == 'centos':
-        prfs_d['home'] = confmap(cf, "HomeDirs")['centos_home']
-    else:
-        raise BadSettings('Operative system not chosen')
-
-    if os_version == 'fedora':
         prfs_d['version'] = confmap(cf, "Version")['fed_version']
         prfs_d['version'] = prfs_d['version'] + prfs_d['cat']
     elif os_version == 'ubuntu':
+        prfs_d['home'] = confmap(cf, "HomeDirs")['ub_home']
         prfs_d['version'] = confmap(cf, "Version")['ub_version']
         prfs_d['version'] = prfs_d['version'] + prfs_d['cat']
     elif os_version == 'test':
+        prfs_d['home'] = confmap(cf, "HomeDirs")['test_home']
         prfs_d['version'] = confmap(cf, "Version")['test_version']
         prfs_d['version'] = prfs_d['version'] + prfs_d['cat']
     elif os_version == 'centos':
+        prfs_d['home'] = confmap(cf, "HomeDirs")['centos_home']
         prfs_d['version'] = confmap(cf, "Version")['centos_version']
         prfs_d['version'] = prfs_d['version'] + prfs_d['cat']
     else:

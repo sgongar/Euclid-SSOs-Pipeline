@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/sgongar/Euclid-SSOs-Pipeline.svg?branch=master)](https://travis-ci.org/sgongar/Euclid-SSOs-Pipeline)
+[![Build Status](https://travis-ci.org/sgongar/Euclid-SSOs-Pipeline.svg?branch=master)](https://travis-ci.org/sgongar/Euclid-SSOs-Pipeline) [![Coverage Status](https://coveralls.io/repos/github/sgongar/Euclid-SSOs-Pipeline/badge.svg?branch=master)](https://coveralls.io/github/sgongar/Euclid-SSOs-Pipeline?branch=master)
