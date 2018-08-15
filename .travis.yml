@@ -22,7 +22,7 @@ script:
   - nosetests test_miscGetFitsFunctions.py
   - nosetests test_miscGetFPAsFunctions.py
   - nosetests test_miscGetFitsDFunctions.py
-  - nosetests test_miscGetCats.py
+# - nosetests test_miscGetCats.py
   - nosetests test_miscGetOs.py
   - nosetests test_miscAllSame.py
   - nosetests test_miscCreateSextractorDict.py
@@ -40,7 +40,7 @@ script:
   - coverage run -a test_miscGetFitsFunctions.py
   - coverage run -a test_miscGetFPAsFunctions.py
   - coverage run -a test_miscGetFitsDFunctions.py
-  - coverage run -a test_miscGetCats.py
+# - coverage run -a test_miscGetCats.py
   - coverage run -a test_miscGetOs.py
   - coverage run -a test_miscAllSame.py
   - coverage run -a test_miscCreateSextractorDict.py

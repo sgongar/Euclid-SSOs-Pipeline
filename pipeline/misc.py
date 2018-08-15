@@ -35,37 +35,37 @@ __email__ = "sgongora@cab.inta-csic.es"
 __status__ = "Development"
 
 
-def get_cats():
-    """ Loops over the different folders.
-
-    :return:
-    """
-    prfs_d = extract_settings()
-
-    mode = {'type': 'sextractor'}
-    confs, total_confs = create_configurations(mode)
-
-    folders = []
-    for idx, conf_ in enumerate(confs):
-        analysis_d, len_dicts = create_sextractor_dict(idx, False)
-        folder_n = '{}_{}_{}_{}_{}'.format(analysis_d['deblend_nthresh'],
-                                           analysis_d['analysis_thresh'],
-                                           analysis_d['detect_thresh'],
-                                           analysis_d['deblend_mincount'],
-                                           analysis_d['detect_minarea'])
-        folders.append(folder_n)
-
-    cat_dict = {}
-    # FIXME Magnitude it's harcoded...change it!
-    for folder_ in folders:
-        cat_dict[folder_] = []
-        files = os.listdir('{}/20-21/CCDs/{}'.format(prfs_d['fits_dir'],
-                                                     folder_))
-        for file_ in files:
-            if file_[:1] == 'm' and file_[-4:] == '.cat':
-                cat_dict[folder_].append(file_)
-
-    return cat_dict
+# def get_cats():
+#     """ Loops over the different folders.
+#
+#     :return:
+#     """
+#     prfs_d = extract_settings()
+#
+#     mode = {'type': 'sextractor'}
+#     confs, total_confs = create_configurations(mode)
+#
+#     folders = []
+#     for idx, conf_ in enumerate(confs):
+#         analysis_d, len_dicts = create_sextractor_dict(idx, False)
+#         folder_n = '{}_{}_{}_{}_{}'.format(analysis_d['deblend_nthresh'],
+#                                            analysis_d['analysis_thresh'],
+#                                            analysis_d['detect_thresh'],
+#                                            analysis_d['deblend_mincount'],
+#                                            analysis_d['detect_minarea'])
+#         folders.append(folder_n)
+#
+#     cat_dict = {}
+#     # FIXME Magnitude it's harcoded...change it!
+#     for folder_ in folders:
+#         cat_dict[folder_] = []
+#         files = os.listdir('{}/20-21/CCDs/{}'.format(prfs_d['fits_dir'],
+#                                                      folder_))
+#         for file_ in files:
+#             if file_[:1] == 'm' and file_[-4:] == '.cat':
+#                 cat_dict[folder_].append(file_)
+#
+#     return cat_dict
 
 
 def get_os():
@@ -850,41 +850,41 @@ def get_dither(catalog_n):
     return ccd, int(dither)
 
 
-def get_norm_speed(o_pm):
-    """
+# def get_norm_speed(o_pm):
+#     """
+#
+#     :param o_pm:
+#     :return: pm_norm
+#     """
+#     prfs_d = extract_settings()
+#     speeds_d = speeds_range(prfs_d, 50)
+#
+#     pm_norm = 0
+#     for key_ in speeds_d.keys():
+#         low = speeds_d[key_][0]
+#         high = speeds_d[key_][1]
+#         if low < o_pm < high:
+#             pm_norm = key_
+#
+#     return pm_norm
 
-    :param o_pm:
-    :return: pm_norm
-    """
-    prfs_d = extract_settings()
-    speeds_d = speeds_range(prfs_d, 50)
 
-    pm_norm = 0
-    for key_ in speeds_d.keys():
-        low = speeds_d[key_][0]
-        high = speeds_d[key_][1]
-        if low < o_pm < high:
-            pm_norm = key_
-
-    return pm_norm
-
-
-def check_source(o_df, o_alpha, o_delta):
-    """
-
-    :param o_df:
-    :param o_alpha:
-    :param o_delta:
-    :return:
-    """
-    prfs_d = extract_settings()
-
-    o_df = o_df[o_df['ALPHA_J2000'] + prfs_d['tolerance'] > o_alpha]
-    o_df = o_df[o_alpha > o_df['ALPHA_J2000'] - prfs_d['tolerance']]
-    o_df = o_df[o_df['DELTA_J2000'] + prfs_d['tolerance'] > o_delta]
-    o_df = o_df[o_delta > o_df['DELTA_J2000'] - prfs_d['tolerance']]
-
-    return o_df
+# def check_source(o_df, o_alpha, o_delta):
+#     """
+#
+#     :param o_df:
+#     :param o_alpha:
+#     :param o_delta:
+#     :return:
+#     """
+#     prfs_d = extract_settings()
+#
+#     o_df = o_df[o_df['ALPHA_J2000'] + prfs_d['tolerance'] > o_alpha]
+#     o_df = o_df[o_alpha > o_df['ALPHA_J2000'] - prfs_d['tolerance']]
+#     o_df = o_df[o_df['DELTA_J2000'] + prfs_d['tolerance'] > o_delta]
+#     o_df = o_df[o_delta > o_df['DELTA_J2000'] - prfs_d['tolerance']]
+#
+#     return o_df
 
 
 def check_source_elvis(o_df, o_alpha, o_delta):
