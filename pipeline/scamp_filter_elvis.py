@@ -44,11 +44,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :param scmp_cf:
         :param sex_d:
         """
-        # Filter variables
-        self.class_star_limit = 0.97
-        self.proper_motion = 1.25
-        self.proper_motion_dects = 1.25
-
         # Analysis variables
         self.prfs_d = extract_settings_elvis()
         self.logger = logger
@@ -66,8 +61,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = self.compute_pm(merged_db, full_db)
         # Saves _3.csv
         full_df = self.get_areas(full_df)
-        # full_df = full_df[full_df['MEAN_CLASS_STAR'] > self.class_star_limit]
-
         full_df = self.filter_class(full_df)
 
         # full_df = self.filter_pm(full_df)  # 6th version
