@@ -7,9 +7,9 @@ branches:
 install:
   - pip install coveralls
   - pip install coverage
-  - pip install -r pipeline_elvis/requirements.txt
+  - pip install -r pipeline/requirements.txt
 script:
-  - cd pipeline_elvis/tests
+  - cd pipeline/tests
   - nosetests test_checkOptions.py
   - nosetests test_checkInit.py
   - nosetests test_failedOptions.py
@@ -47,4 +47,4 @@ script:
 after_success:
   - coverage combine
   - coverage report -m -i --omit '/home/travis/virtualenv/*'
-  - coveralls --rcfile='/home/travis/build/sgongar/Euclid-tests/.coveragerc'
+  - coveralls --rcfile='/home/travis/build/sgongar/Euclid-SSOs-Pipeline/.coveragerc'
