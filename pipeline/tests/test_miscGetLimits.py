@@ -33,7 +33,7 @@ __email__ = "sgongora@cab.inta-csic.es"
 __status__ = "Development"
 
 
-class TestGetTicks(TestCase):
+class TestGetLimits(TestCase):
     """
 
     """
@@ -45,27 +45,17 @@ class TestGetTicks(TestCase):
         """
         pass
 
-    def test_get_ticks(self):
+    def test_get_limits(self):
         """
 
         :return:
         """
-        ticks = misc.get_ticks(1, 4, 1)
+        list_1 = [1, 2, 3, 4]
+        list_2 = [2, 3, 4, 5]
 
-        assert_1 = self.assertIs(type(ticks), list)
-        assert_2 = self.assertIs(ticks[0], 1)
-        assert_3 = self.assertIs(ticks[1], 2)
-        assert_4 = self.assertIs(ticks[2], 3)
-        assert_5 = self.assertIs(ticks[3], 4)
+        limits = misc.get_limits(list_1, list_2)
 
-        return assert_1 and assert_2 and assert_3 and assert_4 and assert_5
-
-    def test_get_ticks_wrong(self):
-        """
-
-        :return:
-        """
-        return self.assertRaises(WrongTicksList, misc.get_ticks, 0.3, 4, 5)
+        return self.assertIs(limits[0], 1) and self.assertIs(limits[1], 5)
 
     def tearDown(self):
         """
