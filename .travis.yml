@@ -1,0 +1,50 @@
+language: python
+python:
+  - "2.7"
+branches:
+  only:
+    - master
+install:
+  - pip install coveralls
+  - pip install coverage
+  - pip install -r pipeline_elvis/requirements.txt
+script:
+  - cd pipeline_elvis/tests
+  - nosetests test_checkOptions.py
+  - nosetests test_checkInit.py
+  - nosetests test_failedOptions.py
+  - nosetests test_failedFullPipelineSteps.py
+  - nosetests test_splitMethodCheckElvis.py
+  - nosetests test_cleanMethodCheckElvis.py
+  - nosetests test_sextractorMethodCheckElvis.py
+  - nosetests test_sextractorSextractorELViSProcess.py
+# - nosetests test_sextractorSextractorELViSThreads.py
+  - nosetests test_miscGetFitsFunctions.py
+  - nosetests test_miscGetFPAsFunctions.py
+  - nosetests test_miscGetFitsDFunctions.py
+  - nosetests test_miscGetCats.py
+  - nosetests test_miscGetOs.py
+  - nosetests test_miscAllSame.py
+  - nosetests test_miscCreateSextractorDict.py
+  - nosetests test_miscCreateScampDict.py
+  - coverage run -a test_checkOptions.py
+  - coverage run -a test_checkInit.py
+  - coverage run -a test_failedOptions.py
+  - coverage run -a test_failedFullPipelineSteps.py
+  - coverage run -a test_splitMethodCheckElvis.py
+  - coverage run -a test_cleanMethodCheckElvis.py
+  - coverage run -a test_sextractorMethodCheckElvis.py
+  - coverage run -a test_sextractorSextractorELViSProcess.py
+# - coverage run -a test_sextractorSextractorELViSThreads.py
+  - coverage run -a test_miscGetFitsFunctions.py
+  - coverage run -a test_miscGetFPAsFunctions.py
+  - coverage run -a test_miscGetFitsDFunctions.py
+  - coverage run -a test_miscGetCats.py
+  - coverage run -a test_miscGetOs.py
+  - coverage run -a test_miscAllSame.py
+  - coverage run -a test_miscCreateSextractorDict.py
+  - coverage run -a test_miscCreateScampDict.py
+after_success:
+  - coverage combine
+  - coverage report -m -i --omit '/home/travis/virtualenv/*'
+  - coveralls --rcfile='/home/travis/build/sgongar/Euclid-tests/.coveragerc'

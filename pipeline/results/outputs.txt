@@ -1,0 +1,132 @@
+Output for d1 and d2 dithers.
+
+
+> WARNING: x keyword unknown
+
+----- SCAMP 2.0.4 started on 2017-06-03 at 15:00:37 with 8 threads
+
+----- 18 inputs:
+mag_20-21_CCD_x0_y0_d1_copy.cat:  "no ident           "  no ext. header   1 set   14167 detections
+mag_20-21_CCD_x0_y1_d1_copy.cat:  "no ident           "  no ext. header   1 set   14077 detections
+mag_20-21_CCD_x0_y2_d1_copy.cat:  "no ident           "  no ext. header   1 set   14371 detections
+mag_20-21_CCD_x1_y0_d1_copy.cat:  "no ident           "  no ext. header   1 set   14193 detections
+mag_20-21_CCD_x1_y1_d1_copy.cat:  "no ident           "  no ext. header   1 set   14408 detections
+mag_20-21_CCD_x1_y2_d1_copy.cat:  "no ident           "  no ext. header   1 set   14054 detections
+mag_20-21_CCD_x2_y0_d1_copy.cat:  "no ident           "  no ext. header   1 set   13832 detections
+mag_20-21_CCD_x2_y1_d1_copy.cat:  "no ident           "  no ext. header   1 set   14053 detections
+mag_20-21_CCD_x2_y2_d1_copy.cat:  "no ident           "  no ext. header   1 set   14473 detections
+mag_20-21_CCD_x0_y0_d2_copy.cat:  "no ident           "  no ext. header   1 set   14285 detections
+mag_20-21_CCD_x0_y1_d2_copy.cat:  "no ident           "  no ext. header   1 set   14053 detections
+mag_20-21_CCD_x0_y2_d2_copy.cat:  "no ident           "  no ext. header   1 set   14373 detections
+mag_20-21_CCD_x1_y0_d2_copy.cat:  "no ident           "  no ext. header   1 set   14405 detections
+mag_20-21_CCD_x1_y1_d2_copy.cat:  "no ident           "  no ext. header   1 set   14036 detections
+mag_20-21_CCD_x1_y2_d2_copy.cat:  "no ident           "  no ext. header   1 set   14288 detections
+mag_20-21_CCD_x2_y0_d2_copy.cat:  "no ident           "  no ext. header   1 set   14171 detections
+mag_20-21_CCD_x2_y1_d2_copy.cat:  "no ident           "  no ext. header   1 set   14024 detections
+mag_20-21_CCD_x2_y2_d2_copy.cat:  "no ident           "  no ext. header   1 set   14197 detections
+
+----- 255460 detections loaded
+
+----- 1 instrument found for astrometry:
+
+Instrument A1 :
+1 extensions
+FILTER  =                                                                       
+QRUNID  =                                                                       
+
+----- 1 instrument found for photometry:
+
+Instrument P1 :
+FILTER  =                                                                       
+
+----- 1 field group found:
+
+ Group  1: 18 fields at 08:11:08.27 +45:10:33.6 with radius 16.45'
+                  instruments  epoch      center coordinates     radius   scale 
+mag_20-21_CCD_x0_y0_ A1  P1    2017.4  08:11:50.67 +45:01:43.5   4.852'  0.1000"
+mag_20-21_CCD_x0_y1_ A1  P1    2017.4  08:11:50.65 +45:09:44.8   4.852'  0.1000"
+mag_20-21_CCD_x0_y2_ A1  P1    2017.4  08:11:50.63 +45:17:46.0   4.852'  0.1000"
+mag_20-21_CCD_x1_y0_ A1  P1    2017.4  08:11:10.76 +45:01:43.1   4.852'  0.1000"
+mag_20-21_CCD_x1_y1_ A1  P1    2017.4  08:11:10.65 +45:09:44.3   4.852'  0.1000"
+mag_20-21_CCD_x1_y2_ A1  P1    2017.4  08:11:10.53 +45:17:45.5   4.852'  0.1000"
+mag_20-21_CCD_x2_y0_ A1  P1    2017.4  08:10:30.86 +45:01:41.8   4.852'  0.1000"
+mag_20-21_CCD_x2_y1_ A1  P1    2017.4  08:10:30.65 +45:09:43.0   4.852'  0.1000"
+mag_20-21_CCD_x2_y2_ A1  P1    2017.4  08:10:30.44 +45:17:44.2   4.852'  0.1000"
+mag_20-21_CCD_x0_y0_ A1  P1    2017.4  08:11:45.95 +45:03:23.5   4.852'  0.1000"
+mag_20-21_CCD_x0_y1_ A1  P1    2017.4  08:11:45.92 +45:11:24.8   4.852'  0.1000"
+mag_20-21_CCD_x0_y2_ A1  P1    2017.4  08:11:45.88 +45:19:26.0   4.852'  0.1000"
+mag_20-21_CCD_x1_y0_ A1  P1    2017.4  08:11:06.02 +45:03:23.0   4.852'  0.1000"
+mag_20-21_CCD_x1_y1_ A1  P1    2017.4  08:11:05.90 +45:11:24.2   4.852'  0.1000"
+mag_20-21_CCD_x1_y2_ A1  P1    2017.4  08:11:05.77 +45:19:25.4   4.852'  0.1000"
+mag_20-21_CCD_x2_y0_ A1  P1    2017.4  08:10:26.10 +45:03:21.6   4.852'  0.1000"
+mag_20-21_CCD_x2_y1_ A1  P1    2017.4  08:10:25.88 +45:11:22.8   4.852'  0.1000"
+mag_20-21_CCD_x2_y2_ A1  P1    2017.4  08:10:25.66 +45:19:24.0   4.852'  0.1000"
+
+----- Reference catalogs:
+
+> Loading Catalog catalogue.cat...
+> WARNING: MJD-OBS parameter not found in catalog catalogue.cat
+
+ 165399 astrometric references loaded from catalogue.cat
+ Group  1:   165399 standards found in file (1 band)
+
+----- Astrometric matching:
+
+ Group  1:   165399 standards in file (band 1)
+              instruments  pos.angle   scale    cont.        shift        cont.
+mag_20-21_CCD_x0_y A1  P1  +0.00 deg  0.1000"   11.4  +0.0025"-0.00072"   33.3
+mag_20-21_CCD_x0_y A1  P1  +0.00 deg  0.1000"   9.19  -0.0015" +0.0096"   32.8
+mag_20-21_CCD_x0_y A1  P1  +0.00 deg  0.1000"   7.55  -0.0034" +0.0011"   31.5
+mag_20-21_CCD_x1_y A1  P1  -0.05 deg  0.1000"   8.74  -0.0025"  +0.057"   35.8
+mag_20-21_CCD_x1_y A1  P1  -0.05 deg 0.09999"   4.16   -0.020"  +0.051"   35.0
+mag_20-21_CCD_x1_y A1  P1  -0.06 deg 0.09999"   4.97  -0.0065"  +0.045"   32.8
+mag_20-21_CCD_x2_y A1  P1  -0.07 deg  0.1000"   7.33  -0.0077"  +0.069"   32.6
+mag_20-21_CCD_x2_y A1  P1  -0.01 deg  0.1000"   1.80   -0.026"  -0.011"   5.57
+mag_20-21_CCD_x2_y A1  P1  -0.02 deg  0.1000"   1.78   -0.017" -0.0024"   5.45
+mag_20-21_CCD_x0_y A1  P1  -0.00 deg  0.1000"   5.89  +0.0036" +0.0026"   36.5
+mag_20-21_CCD_x0_y A1  P1  -0.00 deg  0.1000"   7.36  -0.0053" +0.0044"   38.3
+mag_20-21_CCD_x0_y A1  P1  -0.01 deg  0.1000"   6.16  -0.0012"  +0.014"   36.4
+mag_20-21_CCD_x1_y A1  P1  -0.05 deg  0.1000"   5.89 +0.00061"   +0.19"   38.3
+mag_20-21_CCD_x1_y A1  P1  -0.05 deg 0.09999"   5.24   -0.025"   +0.20"   37.1
+mag_20-21_CCD_x1_y A1  P1  -0.06 deg  0.1000"   4.68  -0.0023"   +0.20"   36.1
+mag_20-21_CCD_x2_y A1  P1  -0.06 deg  0.1000"   4.12   -0.010"   +0.22"   33.4
+mag_20-21_CCD_x2_y A1  P1  -0.07 deg  0.1000"   2.32   -0.018"   +0.22"   19.7
+mag_20-21_CCD_x2_y A1  P1  -0.06 deg  0.1000"   2.90   -0.024"   +0.20"   17.8
+
+  
+----- Astrometric clipping:
+
+ Group  1: 18989/220044 detections removed
+  
+----- Astrometric stats (internal) :
+
+                  All detections         |           High S/N           
+           dAXIS1  dAXIS2   chi2   ndets | dAXIS1  dAXIS2   chi2   ndets
+Group  1:  0.557"  0.596" 6.8e+02  190110   0.275"  0.572"  4e+03     813
+  
+----- Astrometric stats (external):
+
+                  All detections         |           High S/N           
+           dAXIS1  dAXIS2   chi2  nstars | dAXIS1  dAXIS2   chi2  nstars
+Group  1:   1.31"   1.53" 1.7e+03  101294    1.15"   1.82" 8.9e+03     409
+  
+----- Photometric clipping:
+
+ Group  1 / P1  : 4/188978 detections removed
+  
+----- Photometric stats (internal):
+
+                     All detections     |        High S/N        
+         Instru mag RMS    chi2   ndets | mag RMS    chi2   ndets
+Group  1: P1        1.2 2.1e+02  188973     0.234 3.4e+03     808
+  
+----- Photometric stats (external):
+
+                     All detections     |        High S/N        
+         Instru mag RMS    chi2  nstars | mag RMS    chi2  nstars
+
+> Generating astrometric plots...
+*** PLPLOT WARNING ***
+All pages after the first skipped because family file output not specified.
+
+> All done (in 82 s: 0.2 field/s , 3115 detections/s)

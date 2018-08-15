@@ -1,0 +1,51 @@
+### Byte-compiled / optimized / DLL files ###
+__pycache__/
+pipeline/__pycache__/
+*.py[cod]
+*$py.class
+
+### logs & tests ###
+install.txt
+
+### pycharm IDE ###
+.idea/*
+
+### RStudio IDE ###
+regressions/.RData
+regressions/.Rhistory
+
+### virtualenv ###
+.venv/*
+pipeline/.venv/*
+regressions/.venv/*
+
+### Swarp files ###
+pipeline/swarp.xml
+
+### Test reports ###
+pipeline/*.pdf
+pipeline/report*.pdf
+pipeline/reports/*
+
+### Trial tests ###
+tests/_trial_temp/*
+
+### Catalogs ###
+pipeline/*.csv
+
+### Temporal ###
+pipeline/tmp/*.csv
+pipeline/tmp/*.reg
+*.cmake
+
+### Logs ###
+pipeline/logs/*
+
+### Plots ###
+pipeline/plots/*
+performance/output/*
+.Rproj.user
+
+
+### Images ###
+performance/*fits
