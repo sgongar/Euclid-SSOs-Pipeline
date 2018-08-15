@@ -22,7 +22,7 @@ from pandas import concat, Series
 import statsmodels.api as sm
 
 from errors import BadSettings, AllSameException, WrongOS
-from errors import InvalidScampConfiguration
+from errors import InvalidScampConfiguration, WrongTicksList
 from logging import getLogger, config
 
 
@@ -457,6 +457,9 @@ def get_ticks(min_number, max_number, resolution):
     ticks = []
     for i in range(int(min_number), number_ticks, 1):
         ticks.append(i * resolution)
+
+    if len(ticks) == 1:
+        raise WrongTicksList
 
     return ticks
 

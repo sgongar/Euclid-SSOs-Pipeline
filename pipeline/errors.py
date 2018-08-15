@@ -124,3 +124,10 @@ class InvalidScampConfiguration(Exception):
     One of the following situations may raise this error:
         1.
     """
+
+
+class WrongTicksList(Exception):
+    """
+    One of the following situations may raise this error:
+        1.
+    """
