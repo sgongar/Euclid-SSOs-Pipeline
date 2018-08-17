@@ -44,6 +44,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :param scmp_cf:
         :param sex_d:
         """
+        # Filter variables
+        self.class_star_limit = 0.97
+        self.proper_motion = 1.25
+        self.proper_motion_dects = 1.25
+
         # Analysis variables
         self.prfs_d = extract_settings_elvis()
         self.logger = logger
@@ -61,12 +66,14 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = self.compute_pm(merged_db, full_db)
         # Saves _3.csv
         full_df = self.get_areas(full_df)
+        # full_df = full_df[full_df['MEAN_CLASS_STAR'] > self.class_star_limit]
+        # full_df = self.filter_coherence(full_df)
+
         full_df = self.filter_class(full_df)
 
         # full_df = self.filter_pm(full_df)  # 6th version
         # full_df = self.filter_mag(full_df)  # 7th version
         full_df = self.filter_b_image(full_df)  # 8th version
-        full_df = self.filter_coherence(full_df)
 
         full_df = full_df[full_df['PM'] > 0.01]
 
@@ -199,12 +206,12 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         stats_keys = ['MEAN_A_IMAGE', 'MEAN_B_IMAGE', 'MEAN_CLASS_STAR',
                       'MEDIAN_A_IMAGE', 'MEDIAN_B_IMAGE', 'MEDIAN_CLASS_STAR',
-                      'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE',
-                      'MEDIAN_ERRA_IMAGE', 'MEDIAN_ERRB_IMAGE',
-                      'MEDIAN_FLUX_ISO', 'MEAN_FLUX_ISO', 'MEDIAN_FLUXERR_ISO',
-                      'MEAN_FLUXERR_ISO', 'MEDIAN_ELLIPTICITY',
-                      'MEAN_ELLIPTICITY', 'MEDIAN_MAG_ISO',
-                      'MEAN_MAG_ISO', 'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO']
+                      'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE', 'MEDIAN_ERRA_IMAGE',
+                      'MEDIAN_ERRB_IMAGE', 'MEDIAN_FLUX_ISO', 'MEAN_FLUX_ISO',
+                      'MEDIAN_FLUXERR_ISO', 'MEAN_FLUXERR_ISO',
+                      'MEDIAN_ELLIPTICITY', 'MEAN_ELLIPTICITY',
+                      'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO', 'MEDIAN_MAGERR_ISO',
+                      'MEAN_MAGERR_ISO']
         extra_keys = ['A_IMAGE', 'B_IMAGE', 'THETA_IMAGE', 'ISOAREA_IMAGE',
                       'FWHM_IMAGE', 'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS',
                       'MAG_ISO', 'MAGERR_ISO', 'ELONGATION', 'ELLIPTICITY',
@@ -301,7 +308,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                       'MEDIAN_MAG_ISO', 'MEDIAN_MAGERR_ISO',
                       'MEDIAN_ELLIPTICITY', 'MEAN_A_IMAGE', 'MEAN_B_IMAGE',
                       'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE', 'MEAN_CLASS_STAR',
-                      'MEAN_FLUX_ISO', 'MEAN_FLUXERR_ISO', 'MEAN_MAG_ISO',
+                      'MEAN_FLUX_ISO', 'MEAN_FLUXERR_ISO','MEAN_MAG_ISO',
                       'MEAN_MAGERR_ISO', 'MEAN_ELLIPTICITY']
         tmp_d = {}
         for key_ in tmp_d_keys:
@@ -526,7 +533,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             pm = float(o_df['PM'])
             class_star = float(o_df['MEAN_CLASS_STAR'])
 
-            if pm < 0.6 and class_star < 0.75:
+            if pm < 0.5 and class_star < 0.825:
                 rejected.append(source_)
             else:
                 accepted.append(source_)
@@ -865,11 +872,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :return: full_db
         """
         self.logger.debug('Runs coherence motion filter')
-        for source_ in full_db['SOURCE_NUMBER'].tolist():
-            print(source_)
-            print(full_db[full_db['SOURCE_NUMBER'].isin([source_])])
-
-        # full_db = confidence_filter(full_db, 0.60)  # was 0.97
+        full_db = confidence_filter(full_db, 0.60)  # was 0.97
 
         return full_db
 
