@@ -39,13 +39,7 @@ pipeline/tmp/*.reg
 *.cmake
 
 ### Logs ###
-# pipeline/logs/*
-
-### Plots ###
-pipeline/plots/*
-performance/output/*
-.Rproj.user
-
+pipeline/logs/*.log
 
 ### Images ###
 performance/*fits
