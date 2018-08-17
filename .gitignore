@@ -39,7 +39,7 @@ pipeline/tmp/*.reg
 *.cmake
 
 ### Logs ###
-pipeline/logs/*
+# pipeline/logs/*
 
 ### Plots ###
 pipeline/plots/*
