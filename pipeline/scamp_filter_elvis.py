@@ -848,8 +848,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             mag_iso = float(o_df['MEDIAN_MAG_ISO'])
             b_image = float(o_df['MEDIAN_B_IMAGE'])
 
-            upper_test = filter_tests['upper_test'](mag_iso)
-            lower_test = filter_tests['lower_test'](mag_iso)
+            upper_test = filter_tests['upper_fit'](mag_iso)
+            lower_test = filter_tests['lower_fit'](mag_iso)
             b_test = float(lower_test) < b_image < float(upper_test)
 
             print('mag_iso {} - b_image {} - upper_test {} - lower_test {} - b_test {}'.format(mag_iso,
