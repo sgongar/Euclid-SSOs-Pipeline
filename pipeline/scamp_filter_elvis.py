@@ -788,11 +788,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         # pm-a-b relation without error
         # new sextractor configuration
         filter_params = {'lower_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10667.2],
+                                       -205.9224, 2346.394, -10667.0],
                          'central_fit': [0.001714116, -0.1967933, 9.013903,
                                          -205.9224, 2346.394, -10666.8],
                          'upper_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10666.4]}
+                                       -205.9224, 2346.394, -10666.6]}
 
         filter_tests = {'lower_fit': poly1d(filter_params['lower_fit']),
                         'upper_fit': poly1d(filter_params['upper_fit'])}
