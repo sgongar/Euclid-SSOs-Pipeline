@@ -527,7 +527,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             pm = float(o_df['PM'])
             class_star = float(o_df['MEAN_CLASS_STAR'])
 
-            if pm < 0.6 and class_star < 0.7:
+            if pm < 1.0 and class_star < 0.6:
                 rejected.append(source_)
             else:
                 accepted.append(source_)
