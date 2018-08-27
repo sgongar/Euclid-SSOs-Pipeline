@@ -19,7 +19,7 @@ from multiprocessing import Process
 
 from astropy.io import fits
 from astropy.table import Table
-from numpy import mean, median
+from numpy import mean, median, poly1d
 from pandas import concat, read_csv, Series
 
 from misc import pm_compute, extract_settings_elvis
@@ -200,12 +200,12 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         stats_keys = ['MEAN_A_IMAGE', 'MEAN_B_IMAGE', 'MEAN_CLASS_STAR',
                       'MEDIAN_A_IMAGE', 'MEDIAN_B_IMAGE', 'MEDIAN_CLASS_STAR',
-                      'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE', 'MEDIAN_ERRA_IMAGE',
-                      'MEDIAN_ERRB_IMAGE', 'MEDIAN_FLUX_ISO', 'MEAN_FLUX_ISO',
-                      'MEDIAN_FLUXERR_ISO', 'MEAN_FLUXERR_ISO',
-                      'MEDIAN_ELLIPTICITY', 'MEAN_ELLIPTICITY',
-                      'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO', 'MEDIAN_MAGERR_ISO',
-                      'MEAN_MAGERR_ISO']
+                      'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE',
+                      'MEDIAN_ERRA_IMAGE', 'MEDIAN_ERRB_IMAGE',
+                      'MEDIAN_FLUX_ISO', 'MEAN_FLUX_ISO', 'MEDIAN_FLUXERR_ISO',
+                      'MEAN_FLUXERR_ISO', 'MEDIAN_ELLIPTICITY',
+                      'MEAN_ELLIPTICITY', 'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO',
+                      'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO']
         extra_keys = ['A_IMAGE', 'B_IMAGE', 'THETA_IMAGE', 'ISOAREA_IMAGE',
                       'FWHM_IMAGE', 'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS',
                       'MAG_ISO', 'MAGERR_ISO', 'ELONGATION', 'ELLIPTICITY',
@@ -302,7 +302,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                       'MEDIAN_MAG_ISO', 'MEDIAN_MAGERR_ISO',
                       'MEDIAN_ELLIPTICITY', 'MEAN_A_IMAGE', 'MEAN_B_IMAGE',
                       'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE', 'MEAN_CLASS_STAR',
-                      'MEAN_FLUX_ISO', 'MEAN_FLUXERR_ISO','MEAN_MAG_ISO',
+                      'MEAN_FLUX_ISO', 'MEAN_FLUXERR_ISO', 'MEAN_MAG_ISO',
                       'MEAN_MAGERR_ISO', 'MEAN_ELLIPTICITY']
         tmp_d = {}
         for key_ in tmp_d_keys:
@@ -787,9 +787,15 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         # pm-a-b relation without error
         # new sextractor configuration
-        filter_params = {'lower_fit': [4.6514109, -0.156525],
-                         'central_fit': [4.896222, -0.156525],
-                         'upper_fit': [5.1410331, -0.156525]}
+        filter_params = {'lower_fit': [-10666.4, 2346.394, -205.9224, 9.013903,
+                                       -0.1967933, 0.001714116],
+                         'central_fit': [-10666.8, 2346.394, -205.9224,
+                                         9.013903, -0.1967933, 0.001714116],
+                         'upper_fit': [-10667.2, 2346.394, -205.9224,
+                                       9.013903, -0.1967933, 0.001714116]}
+
+        filter_tests = {'lower_fit': poly1d(filter_params['lower_fit']),
+                        'upper_fit': poly1d(filter_params['upper_fit'])}
 
         sub_list_1_size = len(unique_sources) / 2
         sub_list_1 = unique_sources[:sub_list_1_size]
@@ -800,7 +806,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         for idx_l in range(0, 2, 1):
             areas_p = Process(target=self.filter_b_image_thread,
                               args=(dict_keys, sub_list_l[idx_l], full_df,
-                                    filter_params, idx_l,))
+                                    filter_tests, idx_l,))
             areas_j.append(areas_p)
             areas_p.start()
 
@@ -819,7 +825,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         return full_df
 
     def filter_b_image_thread(self, dict_keys, unique_sources_thread, full_df,
-                              filter_params, idx_l):
+                              filter_tests, idx_l):
         """
 
         :param dict_keys:
@@ -842,10 +848,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             mag_iso = float(o_df['MEDIAN_MAG_ISO'])
             b_image = float(o_df['MEDIAN_B_IMAGE'])
 
-            upper_test = filter_params['upper_fit'][0] + \
-                         (filter_params['upper_fit'][1] * mag_iso)
-            lower_test = filter_params['lower_fit'][0] + \
-                         (filter_params['lower_fit'][1] * mag_iso)
+            upper_test = filter_tests['upper_test'](mag_iso)
+            lower_test = filter_tests['lower_test'](mag_iso)
             b_test = float(lower_test) < b_image < float(upper_test)
 
             print('mag_iso {} - b_image {} - upper_test {} - lower_test {} - b_test {}'.format(mag_iso,
