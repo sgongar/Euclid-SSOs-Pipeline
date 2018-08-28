@@ -792,11 +792,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         # pm-a-b relation without error
         # new sextractor configuration
         filter_params = {'lower_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10667.0],
+                                       -205.9224, 2346.394, -10667.2],
                          'central_fit': [0.001714116, -0.1967933, 9.013903,
                                          -205.9224, 2346.394, -10666.8],
                          'upper_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10666.6]}
+                                       -205.9224, 2346.394, -10666.4]}
 
         filter_tests = {'lower_fit': poly1d(filter_params['lower_fit']),
                         'upper_fit': poly1d(filter_params['upper_fit'])}
@@ -819,12 +819,15 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             active_areas = list([job.is_alive() for job in areas_j])
             pass
 
-        # Merges areas
         # Merges catalogs
         list_1 = read_csv('{}_8_0.csv'.format(self.filter_o_n), index_col=0)
         list_2 = read_csv('{}_8_1.csv'.format(self.filter_o_n), index_col=0)
 
         full_df = concat([list_1, list_2])
+
+        if self.save:
+            self.save_message('8')
+            full_df.to_csv('{}_8.csv'.format(self.filter_o_n))
 
         return full_df
 
