@@ -527,12 +527,16 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             pm = float(o_df['PM'])
             class_star = float(o_df['MEAN_CLASS_STAR'])
 
-            if pm < 1.0 and class_star < 0.6:
+            if pm < 0.6 and class_star < 0.7:
                 rejected.append(source_)
             else:
                 accepted.append(source_)
 
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
+
+        if self.save:
+            self.save_message('4')
+            full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
 
         return full_df
 
