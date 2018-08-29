@@ -551,7 +551,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             self.save_message('4')
             full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
 
-        print(type(full_df))
+        print(full_df.columns)
         raise Exception
 
         return full_df
