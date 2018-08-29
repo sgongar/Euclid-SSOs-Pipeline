@@ -196,7 +196,9 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO', 'MAGERR_ISO',
                      'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO',
                      'FLAGS_EXTRACTION', 'FLAGS_SCAMP', 'FLAGS_IMA', 'PM',
-                     'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR']
+                     'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR',
+                     'MAG_AUTO', 'MEDIAN_MAG_AUTO', 'MEAN_MAG_AUTO',
+                     'MAGERR_AUTO', 'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO']
 
         """
         stats_keys = ['MEAN_A_IMAGE', 'MEAN_B_IMAGE', 'MEAN_CLASS_STAR',
@@ -551,9 +553,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             self.save_message('4')
             full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
 
-        print(full_df.columns)
-        raise Exception
-
         return full_df
 
     # def filter_pm(self, full_db):
@@ -801,11 +800,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'ELONGATION', 'ELLIPTICITY', 'MEDIAN_ELLIPTICITY',
                      'MEAN_ELLIPTICITY', 'MAG', 'MAGERR', 'MAG_ISO',
                      'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO', 'MAGERR_ISO',
-                     'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO', 'MAG_AUTO',
-                     'MEDIAN_MAG_AUTO', 'MEAN_MAG_AUTO', 'MAGERR_AUTO',
-                     'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO',
+                     'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO',
                      'FLAGS_EXTRACTION', 'FLAGS_SCAMP', 'FLAGS_IMA', 'PM',
-                     'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR']
+                     'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR',
+                     'MAG_AUTO', 'MEDIAN_MAG_AUTO', 'MEAN_MAG_AUTO',
+                     'MAGERR_AUTO', 'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO']
 
         # pm-a-b relation without error
         # new sextractor configuration
