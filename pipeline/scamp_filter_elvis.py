@@ -870,6 +870,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         accepted = []
         rejected = []
 
+        print(full_df.columns)
+
         # Loops over unique sources of filtered file
         for idx, source_ in enumerate(unique_sources_thread):
             print('filter_pm - thread {} - source {}'.format(idx_l, idx))
