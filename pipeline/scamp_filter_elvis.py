@@ -879,8 +879,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])]
 
             # b test
-            mag_auto = float(o_df['MEDIAN_MAG_AUTO'])
-            b_image = float(o_df['MEDIAN_B_IMAGE'])
+            mag_auto = float(o_df['MEDIAN_MAG_AUTO'].iloc[0])
+            b_image = float(o_df['MEDIAN_B_IMAGE'].iloc[0])
 
             if mag_auto < 24.5:
                 b_low = filter_tests['lwr_limit_bright'](mag_auto)
