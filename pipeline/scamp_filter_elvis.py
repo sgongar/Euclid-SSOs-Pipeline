@@ -881,25 +881,29 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             # b test
             mag_auto = float(o_df['MEDIAN_MAG_AUTO'].iloc[0])
             b_image = float(o_df['MEDIAN_B_IMAGE'].iloc[0])
+            pm = float(o_df['PM'].iloc[0])
 
-            if mag_auto < 24.5:
-                b_low = filter_tests['lwr_limit_bright'](mag_auto)
-                b_upr = filter_tests['upr_limit_bright'](mag_auto)
+            if pm > 2:
+                accepted.append(source_)
+            else:
+                if mag_auto < 24.5:
+                    b_low = filter_tests['lwr_limit_bright'](mag_auto)
+                    b_upr = filter_tests['upr_limit_bright'](mag_auto)
 
-                if b_low < b_image < b_upr:
-                    accepted.append(source_)
+                    if b_low < b_image < b_upr:
+                        accepted.append(source_)
 
-                else:
-                    rejected.append(source_)
-            elif mag_auto > 24.5:
-                b_low = filter_tests['lwr_limit_faint'](mag_auto)
-                b_upr = filter_tests['upr_limit_faint'](mag_auto)
+                    else:
+                        rejected.append(source_)
+                elif mag_auto > 24.5:
+                    b_low = filter_tests['lwr_limit_faint'](mag_auto)
+                    b_upr = filter_tests['upr_limit_faint'](mag_auto)
 
-                if b_low < b_image < b_upr:
-                    accepted.append(source_)
+                    if b_low < b_image < b_upr:
+                        accepted.append(source_)
 
-                else:
-                    rejected.append(source_)
+                    else:
+                        rejected.append(source_)
 
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
 
