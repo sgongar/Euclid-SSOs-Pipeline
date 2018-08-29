@@ -37,6 +37,7 @@ ERRCXX_IMAGE      # Cxx error ellipse parameter                        [pixel**(
 ERRCXY_IMAGE      # Cxy error ellipse parameter                        [pixel**(-2)]
 ERRCYY_IMAGE      # Cyy error ellipse parameter                        [pixel**(-2)]
 MAG_AUTO          # Kron-like elliptical aperture magnitude            [mag]
+MAGERR_AUTO
 XWIN_IMAGE        # Windowed position estimate along x                 [pixel]
 YWIN_IMAGE        # Windowed position estimate along y                 [pixel]
 FLUX_AUTO         # Flux within a Kron-like elliptical aperture        [count]

@@ -198,6 +198,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'FLAGS_EXTRACTION', 'FLAGS_SCAMP', 'FLAGS_IMA', 'PM',
                      'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR']
 
+        """
         stats_keys = ['MEAN_A_IMAGE', 'MEAN_B_IMAGE', 'MEAN_CLASS_STAR',
                       'MEDIAN_A_IMAGE', 'MEDIAN_B_IMAGE', 'MEDIAN_CLASS_STAR',
                       'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE',
@@ -206,6 +207,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                       'MEAN_FLUXERR_ISO', 'MEDIAN_ELLIPTICITY',
                       'MEAN_ELLIPTICITY', 'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO',
                       'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO']
+        """
         extra_keys = ['A_IMAGE', 'B_IMAGE', 'THETA_IMAGE', 'ISOAREA_IMAGE',
                       'FWHM_IMAGE', 'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS',
                       'MAG_ISO', 'MAGERR_ISO', 'ELONGATION', 'ELLIPTICITY',
@@ -244,7 +246,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         areas_j = []
         for idx_l in range(0, self.prfs_d['cores_number'], 1):
             areas_p = Process(target=self.get_areas_thread,
-                              args=(dict_keys, stats_keys, extra_keys, keys_l,
+                              args=(dict_keys, extra_keys, keys_l,
                                     sub_list_l[idx_l], full_df, idx_l, cat_d,))
             areas_j.append(areas_p)
             areas_p.start()
@@ -270,12 +272,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         return full_df
 
-    def get_areas_thread(self, dict_keys, stats_keys, extra_keys, keys_l,
+    def get_areas_thread(self, dict_keys, extra_keys, keys_l,
                          unique_sources_thread, filter_cat, idx_l, cat_d):
         """
 
         :param dict_keys:
-        :param stats_keys:
         :param extra_keys:
         :param keys_l:
         :param unique_sources_thread:
@@ -295,15 +296,17 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                       'FWHM_IMAGE', 'ELONGATION', 'CLASS_STAR', 'A_IMAGE',
                       'B_IMAGE', 'ERRA_IMAGE', 'ERRB_IMAGE', 'CLASS_STAR',
                       'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS', 'MAG_ISO',
-                      'MAGERR_ISO', 'ELLIPTICITY', 'MEDIAN_A_IMAGE',
-                      'MEDIAN_B_IMAGE', 'MEDIAN_ERRA_IMAGE',
+                      'MAGERR_ISO', 'MAG_AUTO', 'MAGERR_AUTO', 'ELLIPTICITY',
+                      'MEDIAN_A_IMAGE', 'MEDIAN_B_IMAGE', 'MEDIAN_ERRA_IMAGE',
                       'MEDIAN_ERRB_IMAGE', 'MEDIAN_CLASS_STAR',
                       'MEDIAN_FLUX_ISO', 'MEDIAN_FLUXERR_ISO',
                       'MEDIAN_MAG_ISO', 'MEDIAN_MAGERR_ISO',
+                      'MEDIAN_MAG_AUTO', 'MEDIAN_MAGERR_AUTO',
                       'MEDIAN_ELLIPTICITY', 'MEAN_A_IMAGE', 'MEAN_B_IMAGE',
                       'MEAN_ERRA_IMAGE', 'MEAN_ERRB_IMAGE', 'MEAN_CLASS_STAR',
                       'MEAN_FLUX_ISO', 'MEAN_FLUXERR_ISO', 'MEAN_MAG_ISO',
-                      'MEAN_MAGERR_ISO', 'MEAN_ELLIPTICITY']
+                      'MEAN_MAGERR_ISO', 'MEAN_MAG_AUTO', 'MEAN_MAGERR_AUTO',
+                      'MEAN_ELLIPTICITY']
         tmp_d = {}
         for key_ in tmp_d_keys:
             tmp_d[key_] = []
@@ -323,7 +326,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                              'ELONGATION', 'CLASS_STAR', 'A_IMAGE', 'B_IMAGE',
                              'ERRA_IMAGE', 'ERRB_IMAGE', 'CLASS_STAR',
                              'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS',
-                             'MAG_ISO', 'MAGERR_ISO', 'ELLIPTICITY']
+                             'MAG_ISO', 'MAGERR_ISO', 'MAG_AUTO', 'MAGERR_AUTO',
+                             'ELLIPTICITY']
             source_d = {}
             for key_ in source_d_keys:
                 source_d[key_] = []
@@ -395,6 +399,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                     source_d['FLUX_RADIUS'].append(cat_df['FLUX_RADIUS'].iloc[0])
                     source_d['MAG_ISO'].append(cat_df['MAG_ISO'].iloc[0])
                     source_d['MAGERR_ISO'].append(cat_df['MAGERR_ISO'].iloc[0])
+                    source_d['MAG_AUTO'].append(cat_df['MAG_AUTO'].iloc[0])
+                    source_d['MAGERR_AUTO'].append(cat_df['MAGERR_AUTO'].iloc[0])
                     source_d['ELLIPTICITY'].append(cat_df['ELLIPTICITY'].iloc[0])
 
             if length_source == right_source:
@@ -424,6 +430,12 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
                 mean_magerr_iso = mean(source_d['MAGERR_ISO'])
                 median_magerr_iso = median(source_d['MAGERR_ISO'])
+
+                mean_mag_auto = mean(source_d['MAG_AUTO'])
+                median_mag_auto = median(source_d['MAG_AUTO'])
+
+                mean_magerr_auto = mean(source_d['MAGERR_AUTO'])
+                median_magerr_auto = median(source_d['MAGERR_AUTO'])
 
                 mean_ellipticity = mean(source_d['ELLIPTICITY'])
                 median_ellipticiy = median(source_d['ELLIPTICITY'])
@@ -479,6 +491,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                     tmp_d['MEDIAN_FLUXERR_ISO'].append(median_fluxerr_iso)
                     tmp_d['MEDIAN_MAG_ISO'].append(median_mag_iso)
                     tmp_d['MEDIAN_MAGERR_ISO'].append(median_magerr_iso)
+                    tmp_d['MEDIAN_MAG_AUTO'].append(median_mag_auto)
+                    tmp_d['MEDIAN_MAGERR_AUTO'].append(median_magerr_auto)
                     tmp_d['MEDIAN_ELLIPTICITY'].append(median_ellipticiy)
                     tmp_d['MEAN_A_IMAGE'].append(mean_a_image)
                     tmp_d['MEAN_B_IMAGE'].append(mean_b_image)
@@ -489,6 +503,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                     tmp_d['MEAN_FLUXERR_ISO'].append(mean_fluxerr_iso)
                     tmp_d['MEAN_MAG_ISO'].append(mean_mag_iso)
                     tmp_d['MEAN_MAGERR_ISO'].append(mean_magerr_iso)
+                    tmp_d['MEAN_MAG_AUTO'].append(mean_mag_auto)
+                    tmp_d['MEAN_MAGERR_AUTO'].append(mean_magerr_auto)
                     tmp_d['MEAN_ELLIPTICITY'].append(mean_ellipticity)
             else:
                 # Wrong source
@@ -527,7 +543,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             pm = float(o_df['PM'])
             class_star = float(o_df['MEAN_CLASS_STAR'])
 
-            if pm < 0.6 and class_star < 0.7:
+            if pm < 1.0 and class_star < 0.65:
                 rejected.append(source_)
             else:
                 accepted.append(source_)
@@ -785,21 +801,32 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'ELONGATION', 'ELLIPTICITY', 'MEDIAN_ELLIPTICITY',
                      'MEAN_ELLIPTICITY', 'MAG', 'MAGERR', 'MAG_ISO',
                      'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO', 'MAGERR_ISO',
-                     'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO',
+                     'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO', 'MAG_AUTO',
+                     'MEDIAN_MAG_AUTO', 'MEAN_MAG_AUTO', 'MAGERR_AUTO',
+                     'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO',
                      'FLAGS_EXTRACTION', 'FLAGS_SCAMP', 'FLAGS_IMA', 'PM',
                      'PMERR', 'PMALPHA', 'PMDELTA', 'PMALPHAERR', 'PMDELTAERR']
 
         # pm-a-b relation without error
         # new sextractor configuration
-        filter_params = {'lower_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10667.2],
-                         'central_fit': [0.001714116, -0.1967933, 9.013903,
-                                         -205.9224, 2346.394, -10666.8],
-                         'upper_fit': [0.001714116, -0.1967933, 9.013903,
-                                       -205.9224, 2346.394, -10666.4]}
+        upr_coefs_bright = [5.730178e-03, -6.528091e-01, 2.970536e+01,
+                            -6.748832e+02, 7.655361e+03, -3.468232e+04]
+        upr_limit_bright = poly1d(upr_coefs_bright)
+        lwr_coefs_bright = [5.735456e-03, -6.536302e-01, 2.975250e+01,
+                            -6.761721e+02, 7.672408e+03, -3.477074e+04]
+        lwr_limit_bright = poly1d(lwr_coefs_bright)
 
-        filter_tests = {'lower_fit': poly1d(filter_params['lower_fit']),
-                        'upper_fit': poly1d(filter_params['upper_fit'])}
+        upr_coefs_faint = [-1.769922e-02, 1.871337e+00, -7.400582e+01,
+                           1.297378e+03, -8.505660e+03]
+        upr_limit_faint = poly1d(upr_coefs_faint)
+        lwr_coefs_faint = [-3.273145e-02, 3.398693e+00, -1.321923e+02,
+                           2.282417e+03, -1.475840e+04]
+        lwr_limit_faint = poly1d(lwr_coefs_faint)
+
+        filter_tests = {'upr_limit_bright': upr_limit_bright,
+                        'lwr_limit_bright': lwr_limit_bright,
+                        'upr_limit_faint': upr_limit_faint,
+                        'lwr_limit_faint': lwr_limit_faint}
 
         sub_list_1_size = len(unique_sources) / 2
         sub_list_1 = unique_sources[:sub_list_1_size]
@@ -852,23 +879,27 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])].iloc[0]
 
             # b test
-            mag_iso = float(o_df['MEDIAN_MAG_ISO'])
+            mag_auto = float(o_df['MEDIAN_MAG_AUTO'])
             b_image = float(o_df['MEDIAN_B_IMAGE'])
 
-            upper_test = filter_tests['upper_fit'](mag_iso)
-            lower_test = filter_tests['lower_fit'](mag_iso)
-            b_test = float(lower_test) < b_image < float(upper_test)
+            if mag_auto < 24.5:
+                b_low = filter_tests['lwr_limit_bright'](mag_auto)
+                b_upr = filter_tests['upr_limit_bright'](mag_auto)
 
-            print('mag_iso {} - b_image {} - upper_test {} - lower_test {} - b_test {}'.format(mag_iso,
-                                                                                               b_image,
-                                                                                               upper_test,
-                                                                                               lower_test,
-                                                                                               b_test))
+                if b_low < b_image < b_upr:
+                    accepted.append(source_)
 
-            if b_test:
-                accepted.append(source_)
-            else:
-                rejected.append(source_)
+                else:
+                    rejected.append(source_)
+            elif mag_auto > 24.5:
+                b_low = filter_tests['lwr_limit_faint'](mag_auto)
+                b_upr = filter_tests['upr_limit_faint'](mag_auto)
+
+                if b_low < b_image < b_upr:
+                    accepted.append(source_)
+
+                else:
+                    rejected.append(source_)
 
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
 
