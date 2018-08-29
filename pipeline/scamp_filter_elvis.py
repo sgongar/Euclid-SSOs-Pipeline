@@ -876,7 +876,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         for idx, source_ in enumerate(unique_sources_thread):
             print('filter_pm - thread {} - source {}'.format(idx_l, idx))
 
-            o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])].iloc[0]
+            o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])]
 
             print(o_df.columns)
             raise Exception
