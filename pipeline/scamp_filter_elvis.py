@@ -207,7 +207,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                       'MEAN_FLUXERR_ISO', 'MEDIAN_ELLIPTICITY',
                       'MEAN_ELLIPTICITY', 'MEDIAN_MAG_ISO', 'MEAN_MAG_ISO',
                       'MEDIAN_MAGERR_ISO', 'MEAN_MAGERR_ISO']
-        """
         extra_keys = ['A_IMAGE', 'B_IMAGE', 'THETA_IMAGE', 'ISOAREA_IMAGE',
                       'FWHM_IMAGE', 'FLUX_ISO', 'FLUXERR_ISO', 'FLUX_RADIUS',
                       'MAG_ISO', 'MAGERR_ISO', 'ELONGATION', 'ELLIPTICITY',
@@ -219,7 +218,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                   'EPOCH', 'MAG', 'MAGERR', 'FLAGS_EXTRACTION', 'FLAGS_SCAMP',
                   'FLAGS_IMA', 'PM', 'PMERR', 'PMALPHA', 'PMDELTA',
                   'PMALPHAERR', 'PMDELTAERR']
-
+        """
         sub_list_size = len(unique_sources) / self.prfs_d['cores_number']
 
         sub_list_l = []
@@ -246,8 +245,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         areas_j = []
         for idx_l in range(0, self.prfs_d['cores_number'], 1):
             areas_p = Process(target=self.get_areas_thread,
-                              args=(dict_keys, extra_keys, keys_l,
-                                    sub_list_l[idx_l], full_df, idx_l, cat_d,))
+                              args=(dict_keys, sub_list_l[idx_l],
+                                    full_df, idx_l, cat_d,))
             areas_j.append(areas_p)
             areas_p.start()
 
@@ -272,13 +271,11 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         return full_df
 
-    def get_areas_thread(self, dict_keys, extra_keys, keys_l,
-                         unique_sources_thread, filter_cat, idx_l, cat_d):
+    def get_areas_thread(self, dict_keys, unique_sources_thread,
+                         filter_cat, idx_l, cat_d):
         """
 
         :param dict_keys:
-        :param extra_keys:
-        :param keys_l:
         :param unique_sources_thread:
         :param filter_cat:
         :param idx_l:
@@ -553,6 +550,9 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         if self.save:
             self.save_message('4')
             full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
+
+        print(type(full_df))
+        raise Exception
 
         return full_df
 
