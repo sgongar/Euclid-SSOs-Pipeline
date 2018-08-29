@@ -865,7 +865,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :param dict_keys:
         :param unique_sources_thread:
         :param full_df:
-        :param filter_params:
         :param idx_l:
         :return:
         """
@@ -877,6 +876,9 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             print('filter_pm - thread {} - source {}'.format(idx_l, idx))
 
             o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])].iloc[0]
+
+            print(o_df.columns)
+            raise Exception
 
             # b test
             mag_auto = float(o_df['MEDIAN_MAG_AUTO'])
