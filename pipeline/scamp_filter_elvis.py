@@ -878,9 +878,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
             o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])]
 
-            print(o_df.columns)
-            raise Exception
-
             # b test
             mag_auto = float(o_df['MEDIAN_MAG_AUTO'])
             b_image = float(o_df['MEDIAN_B_IMAGE'])
