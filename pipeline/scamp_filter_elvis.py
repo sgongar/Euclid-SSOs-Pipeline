@@ -597,15 +597,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'MAG_AUTO', 'MEDIAN_MAG_AUTO', 'MEAN_MAG_AUTO',
                      'MAGERR_AUTO', 'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO']
 
-        # pm-a-b relation without error
-        # new sextractor configuration
-        # upr_coefs_bright = [5.730178e-03, -6.528091e-01, 2.970536e+01,
-        #                     -6.748832e+02, 7.655361e+03, -3.468232e+04]
-        # upr_limit_bright = poly1d(upr_coefs_bright)
-        # lwr_coefs_bright = [5.735456e-03, -6.536302e-01, 2.975250e+01,
-        #                     -6.761721e+02, 7.672408e+03, -3.477074e+04]
-        # lwr_limit_bright = poly1d(lwr_coefs_bright)
-
+        # mag_auto/b_image relation without error
         # upr_coefs_bright = [5.730702e-03, -6.528906e-01, 2.971004e+01,
         #                     -6.750112e+02, 7.657054e+03, -3.469110e+04]
         # upr_limit_bright = poly1d(upr_coefs_bright)
@@ -613,12 +605,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         #                     -6.760441e+02, 7.670715e+03, -3.476196e+04]
         # lwr_limit_bright = poly1d(lwr_coefs_bright)
         #
-        # upr_coefs_faint = [-1.769922e-02, 1.871337e+00, -7.400582e+01,
-        #                    1.297378e+03, -8.505660e+03]
-        # upr_limit_faint = poly1d(upr_coefs_faint)
-        # lwr_coefs_faint = [-3.273145e-02, 3.398693e+00, -1.321923e+02,
-        #                    2.282417e+03, -1.475840e+04]
-        # lwr_limit_faint = poly1d(lwr_coefs_faint)
 
         upr_coefs_bright = [5.731173e-03, -6.529638e-01, 2.971424e+01,
                             -6.751261e+02, 7.658574e+03, -3.469898e+04]
@@ -693,11 +679,9 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         accepted = []
         rejected = []
 
-        print(full_df.columns)
-
         # Loops over unique sources of filtered file
         for idx, source_ in enumerate(unique_sources_thread):
-            print('filter_pm - thread {} - source {}'.format(idx_l, idx))
+            # print('filter_pm - thread {} - source {}'.format(idx_l, idx))
 
             o_df = full_df[full_df['SOURCE_NUMBER'].isin([source_])]
 
@@ -738,7 +722,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :return: full_db
         """
         self.logger.debug('Runs coherence motion filter')
-        full_df = confidence_filter(full_db, 0.90)  # was 0.97
+        full_df = confidence_filter(full_db, 0.95)  # was 0.97
 
         if self.save:
             self.save_message('6f')
