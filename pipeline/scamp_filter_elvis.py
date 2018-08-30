@@ -719,7 +719,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :return: full_db
         """
         self.logger.debug('Runs coherence motion filter')
-        full_df = confidence_filter(full_db, 0.60)  # was 0.97
+        full_df = confidence_filter(full_db, 0.90)  # was 0.97
 
         if self.save:
             self.save_message('6f')
