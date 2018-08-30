@@ -723,6 +723,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
 
         if self.save:
             self.save_message('6f')
-            full_df.to_csv('{}_6f.csv'.format(self.filter_o_n)
+            full_df.to_csv('{}_6f.csv'.format(self.filter_o_n))
 
         return full_df
