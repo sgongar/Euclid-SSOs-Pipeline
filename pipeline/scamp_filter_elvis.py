@@ -606,11 +606,25 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         #                     -6.761721e+02, 7.672408e+03, -3.477074e+04]
         # lwr_limit_bright = poly1d(lwr_coefs_bright)
 
-        upr_coefs_bright = [5.730702e-03, -6.528906e-01, 2.971004e+01,
-                            -6.750112e+02, 7.657054e+03, -3.469110e+04]
+        # upr_coefs_bright = [5.730702e-03, -6.528906e-01, 2.971004e+01,
+        #                     -6.750112e+02, 7.657054e+03, -3.469110e+04]
+        # upr_limit_bright = poly1d(upr_coefs_bright)
+        # lwr_coefs_bright = [5.734932e-03, -6.535486e-01, 2.974782e+01,
+        #                     -6.760441e+02, 7.670715e+03, -3.476196e+04]
+        # lwr_limit_bright = poly1d(lwr_coefs_bright)
+        #
+        # upr_coefs_faint = [-1.769922e-02, 1.871337e+00, -7.400582e+01,
+        #                    1.297378e+03, -8.505660e+03]
+        # upr_limit_faint = poly1d(upr_coefs_faint)
+        # lwr_coefs_faint = [-3.273145e-02, 3.398693e+00, -1.321923e+02,
+        #                    2.282417e+03, -1.475840e+04]
+        # lwr_limit_faint = poly1d(lwr_coefs_faint)
+
+        upr_coefs_bright = [5.731173e-03, -6.529638e-01, 2.971424e+01,
+                            -6.751261e+02, 7.658574e+03, -3.469898e+04]
         upr_limit_bright = poly1d(upr_coefs_bright)
-        lwr_coefs_bright = [5.734932e-03, -6.535486e-01, 2.974782e+01,
-                            -6.760441e+02, 7.670715e+03, -3.476196e+04]
+        lwr_coefs_bright = [5.734461e-03, -6.534754e-01, 2.974362e+01,
+                            -6.759291e+02, 7.669195e+03, -3.475407e+04]
         lwr_limit_bright = poly1d(lwr_coefs_bright)
 
         upr_coefs_faint = [-1.769922e-02, 1.871337e+00, -7.400582e+01,
@@ -690,8 +704,6 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             # b test
             mag_auto = float(o_df['MEDIAN_MAG_AUTO'].iloc[0])
             b_image = float(o_df['MEDIAN_B_IMAGE'].iloc[0])
-            pm = float(o_df['PM'].iloc[0])
-
 
             if mag_auto < 24.5:
                 b_low = filter_tests['lwr_limit_bright'](mag_auto)
