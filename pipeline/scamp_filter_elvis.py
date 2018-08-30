@@ -598,20 +598,21 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
                      'MAGERR_AUTO', 'MEDIAN_MAGERR_AUTO', 'MEAN_MAGERR_AUTO']
 
         # mag_auto/b_image relation without error
-        # upr_coefs_bright = [5.730702e-03, -6.528906e-01, 2.971004e+01,
-        #                     -6.750112e+02, 7.657054e+03, -3.469110e+04]
-        # upr_limit_bright = poly1d(upr_coefs_bright)
-        # lwr_coefs_bright = [5.734932e-03, -6.535486e-01, 2.974782e+01,
-        #                     -6.760441e+02, 7.670715e+03, -3.476196e+04]
-        # lwr_limit_bright = poly1d(lwr_coefs_bright)
-        #
-
-        upr_coefs_bright = [5.731173e-03, -6.529638e-01, 2.971424e+01,
-                            -6.751261e+02, 7.658574e+03, -3.469898e+04]
+        # More completeness
+        upr_coefs_bright = [5.730702e-03, -6.528906e-01, 2.971004e+01,
+                            -6.750112e+02, 7.657054e+03, -3.469110e+04]
         upr_limit_bright = poly1d(upr_coefs_bright)
-        lwr_coefs_bright = [5.734461e-03, -6.534754e-01, 2.974362e+01,
-                            -6.759291e+02, 7.669195e+03, -3.475407e+04]
+        lwr_coefs_bright = [5.734932e-03, -6.535486e-01, 2.974782e+01,
+                            -6.760441e+02, 7.670715e+03, -3.476196e+04]
         lwr_limit_bright = poly1d(lwr_coefs_bright)
+
+        # More purity
+        # upr_coefs_bright = [5.731173e-03, -6.529638e-01, 2.971424e+01,
+        #                     -6.751261e+02, 7.658574e+03, -3.469898e+04]
+        # upr_limit_bright = poly1d(upr_coefs_bright)
+        # lwr_coefs_bright = [5.734461e-03, -6.534754e-01, 2.974362e+01,
+        #                     -6.759291e+02, 7.669195e+03, -3.475407e+04]
+        # lwr_limit_bright = poly1d(lwr_coefs_bright)
 
         upr_coefs_faint = [-1.769922e-02, 1.871337e+00, -7.400582e+01,
                            1.297378e+03, -8.505660e+03]
@@ -673,6 +674,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :param dict_keys:
         :param unique_sources_thread:
         :param full_df:
+        :param filter_tests:
         :param idx_l:
         :return:
         """
@@ -722,7 +724,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :return: full_db
         """
         self.logger.debug('Runs coherence motion filter')
-        full_df = confidence_filter(full_db, 0.95)  # was 0.97
+        full_df = confidence_filter(full_db, 0.90)  # was 0.97
 
         if self.save:
             self.save_message('6f')
