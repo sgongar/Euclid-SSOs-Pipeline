@@ -61,15 +61,18 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = self.compute_pm(merged_db, full_db)
         # Saves _3.csv
         full_df = self.get_areas(full_df)
-        # full_df = self.filter_coherence(full_df)
-
+        # Saves _4.csv
+        full_df = full_df[full_df['PM'] > 0.01]
+        # Saves _5.csv
         full_df = self.filter_class(full_df)
 
-        # full_df = self.filter_pm(full_df)  # 6th version
-        # full_df = self.filter_mag(full_df)  # 7th version
-        full_df = self.filter_b_image(full_df)  # 8th version
+        fast_df = full_df[full_df['PM'] > 2]
+        slow_df = full_df[full_df['PM'] < 2]
 
-        full_df = full_df[full_df['PM'] > 0.01]
+        fast_df = self.filter_coherence(fast_df)
+        slow_df = self.filter_b_image(slow_df)  # 8th version
+
+        full_df = concat([fast_df, slow_df])
 
         if self.save:
             self.save_message('9')
@@ -655,27 +658,25 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             b_image = float(o_df['MEDIAN_B_IMAGE'].iloc[0])
             pm = float(o_df['PM'].iloc[0])
 
-            if pm > 2:
-                accepted.append(source_)
-            else:
-                if mag_auto < 24.5:
-                    b_low = filter_tests['lwr_limit_bright'](mag_auto)
-                    b_upr = filter_tests['upr_limit_bright'](mag_auto)
 
-                    if b_low < b_image < b_upr:
-                        accepted.append(source_)
+            if mag_auto < 24.5:
+                b_low = filter_tests['lwr_limit_bright'](mag_auto)
+                b_upr = filter_tests['upr_limit_bright'](mag_auto)
 
-                    else:
-                        rejected.append(source_)
-                elif mag_auto > 24.5:
-                    b_low = filter_tests['lwr_limit_faint'](mag_auto)
-                    b_upr = filter_tests['upr_limit_faint'](mag_auto)
+                if b_low < b_image < b_upr:
+                    accepted.append(source_)
 
-                    if b_low < b_image < b_upr:
-                        accepted.append(source_)
+                else:
+                    rejected.append(source_)
+            elif mag_auto > 24.5:
+                b_low = filter_tests['lwr_limit_faint'](mag_auto)
+                b_upr = filter_tests['upr_limit_faint'](mag_auto)
 
-                    else:
-                        rejected.append(source_)
+                if b_low < b_image < b_upr:
+                    accepted.append(source_)
+
+                else:
+                    rejected.append(source_)
 
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
 
