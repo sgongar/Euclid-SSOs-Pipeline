@@ -63,13 +63,18 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = self.get_areas(full_df)
         # Saves _4.csv
         full_df = full_df[full_df['PM'] > 0.01]
+        if self.save:
+            self.save_message('4')
+            full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
         # Saves _5.csv
         full_df = self.filter_class(full_df)
 
         fast_df = full_df[full_df['PM'] > 2]
         slow_df = full_df[full_df['PM'] < 2]
 
+        # Saves _6f.csv
         fast_df = self.filter_coherence(fast_df)
+        # Saves _6s.csv
         slow_df = self.filter_b_image(slow_df)  # 8th version
 
         full_df = concat([fast_df, slow_df])
@@ -154,6 +159,28 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
             merged_db.to_csv('{}_merged_1.csv'.format(self.filter_o_n))
 
         return merged_db, full_db
+
+    def filter_detections(self, full_db, merged_db, detections):
+        """
+
+        :param full_db:
+        :param merged_db:
+        :param detections:
+        :return:
+        """
+        self.logger.debug('Filter by detections number')
+        # De momento lo quito
+        full_db = concat(g for _, g in full_db.groupby("SOURCE_NUMBER")
+                         if len(g) >= int(detections))
+        # Filter by astrometry
+        # merged_db = merged_db[merged_db['NPOS_OK'] >= int(detections)]
+        # Filter by photometry
+        # merged_db = merged_db[merged_db['NMAG'] >= int(detections)]
+
+        # source_list = merged_db['SOURCE_NUMBER'].tolist()
+        # full_db = full_db[full_db['SOURCE_NUMBER'].isin(source_list)]
+
+        return full_db, merged_db
 
     def compute_pm(self, merged_db, full_db):
         """
@@ -532,8 +559,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
 
         if self.save:
-            self.save_message('4')
-            full_df.to_csv('{}_4.csv'.format(self.filter_o_n))
+            self.save_message('5')
+            full_df.to_csv('{}_5.csv'.format(self.filter_o_n))
 
         return full_df
 
@@ -620,15 +647,15 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         # Merges catalogs
         csv_list = []
         for idx_csv in range(0, self.prfs_d['cores_number'], 1):
-            csv_ = read_csv('{}_8_{}.csv'.format(self.filter_o_n, idx_csv),
+            csv_ = read_csv('{}_6s_{}.csv'.format(self.filter_o_n, idx_csv),
                             index_col=0)
             csv_list.append(csv_)
 
         full_df = concat(csv_list)
 
         if self.save:
-            self.save_message('8')
-            full_df.to_csv('{}_8.csv'.format(self.filter_o_n))
+            self.save_message('6s')
+            full_df.to_csv('{}_6s.csv'.format(self.filter_o_n))
 
         return full_df
 
@@ -681,8 +708,8 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         full_df = full_df[full_df['SOURCE_NUMBER'].isin(accepted)]
 
         if self.save:
-            self.save_message('8_{}'.format(idx_l))
-            full_df.to_csv('{}_8_{}.csv'.format(self.filter_o_n, idx_l),
+            self.save_message('6_{}'.format(idx_l))
+            full_df.to_csv('{}_6s_{}.csv'.format(self.filter_o_n, idx_l),
                            columns=dict_keys)
 
     def filter_coherence(self, full_db):
@@ -692,28 +719,10 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         :return: full_db
         """
         self.logger.debug('Runs coherence motion filter')
-        full_db = confidence_filter(full_db, 0.60)  # was 0.97
+        full_df = confidence_filter(full_db, 0.60)  # was 0.97
 
-        return full_db
+        if self.save:
+            self.save_message('6f')
+            full_df.to_csv('{}_6f.csv'.format(self.filter_o_n)
 
-    def filter_detections(self, full_db, merged_db, detections):
-        """
-
-        :param full_db:
-        :param merged_db:
-        :param detections:
-        :return:
-        """
-        self.logger.debug('Filter by detections number')
-        # De momento lo quito
-        full_db = concat(g for _, g in full_db.groupby("SOURCE_NUMBER")
-                         if len(g) >= int(detections))
-        # Filter by astrometry
-        # merged_db = merged_db[merged_db['NPOS_OK'] >= int(detections)]
-        # Filter by photometry
-        # merged_db = merged_db[merged_db['NMAG'] >= int(detections)]
-
-        # source_list = merged_db['SOURCE_NUMBER'].tolist()
-        # full_db = full_db[full_db['SOURCE_NUMBER'].isin(source_list)]
-
-        return full_db, merged_db
+        return full_df
