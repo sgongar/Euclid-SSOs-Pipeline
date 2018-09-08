@@ -273,6 +273,9 @@ def extract_settings_elvis():
     elif os_version == 'cab':
         prfs_d['version'] = confmap(cf, "Version")['cab_version']
         prfs_d['home'] = confmap(cf, "HomeDirs")['cab_home']
+    elif os_version == 'ubuntu':
+        prfs_d['version'] = confmap(cf, "Version")['ubuntu_version']
+        prfs_d['home'] = confmap(cf, "HomeDirs")['ubuntu_home']
     else:
         raise BadSettings('Operative system not chosen')
 
@@ -648,7 +651,7 @@ def setting_logger(prfs_d):
 
     @return logger:
     """
-    print(prfs_d['logger_config'])
+    print('logger {}'.format(prfs_d['logger_config']))
     config.fileConfig(prfs_d['logger_config'])
 
     # TODO implement logger level setting
@@ -899,6 +902,8 @@ def check_source_elvis(o_df, o_alpha, o_delta):
     :return:
     """
     prfs_d = extract_settings_elvis()
+    o_alpha = float(o_alpha)
+    o_delta = float(o_delta)
 
     o_df = o_df[o_df['ALPHA_J2000'] + prfs_d['tolerance'] > o_alpha]
     o_df = o_df[o_alpha > o_df['ALPHA_J2000'] - prfs_d['tolerance']]

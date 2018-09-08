@@ -59,12 +59,11 @@ class SextractorELViS:
         self.logger.info('Starting sextractor process for fits images')
         start_sex = time()  # Sextractor process begins here
 
-        fits_files = listdir(self.prfs_d['fits_dir'])  # filter by *.fits
+        fits_files = listdir(self.prfs_d['fits_dir'])  # TODO filter by *.fits
         active_sex = []
 
         for image_idx in range(0, len(fits_files),
                                self.prfs_d['cores_number']):
-            print(image_idx)
             try:
                 sex_j = []
                 for proc in range(0, self.prfs_d['cores_number'], 1):
