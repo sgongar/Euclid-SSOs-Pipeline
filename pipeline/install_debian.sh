@@ -168,7 +168,7 @@ function main {
 
   cd $installation_dir
 
-  # upgrade_system
+  upgrade_system
   install_virtualenv
   update_pip
 
