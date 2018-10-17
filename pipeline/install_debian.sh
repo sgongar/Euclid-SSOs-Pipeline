@@ -13,7 +13,7 @@ function upgrade_system {
 
 function install_virtualenv {
   # Install virtualenv for deploy a new enviroment
-  virtualenv --python=/usr/bin/python2.7  /home/user/Work/Projects/pipeline/.venv
+  virtualenv --python=/usr/bin/python2.7  $installation_dir
   source /home/user/Work/Projects/pipeline/.venv/bin/activate
 }
 
@@ -160,9 +160,10 @@ function copy_files {
 
 
 function main {
+  installation_dir=pwd
   tmp_dir="/home/user/Work/Projects/pipeline/tmp/"
   local_dir="/home/user/Work/Projects/pipeline/.local/"
-  installation_dir="/media/sf_Euclid-tests/pipeline/"
+  # installation_dir="/media/sf_Euclid-tests/pipeline/"
   atlas_include_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/include"
   atlas_lib_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/lib"
 
