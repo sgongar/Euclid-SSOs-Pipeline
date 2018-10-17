@@ -7,7 +7,7 @@
 
 
 function upgrade_system {
-  sudo yum -y install $(cat packages.txt)
+  sudo aptitude install $(cat packages.txt) -y
 }
 
 
