@@ -160,12 +160,17 @@ function copy_files {
 
 
 function main {
-  installation_dir=pwd
-  tmp_dir="/home/user/Work/Projects/pipeline/tmp/"
-  local_dir="/home/user/Work/Projects/pipeline/.local/"
-  # installation_dir="/media/sf_Euclid-tests/pipeline/"
-  atlas_include_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/include"
-  atlas_lib_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/lib"
+  read -p "Enter installation directory ($PWD): " installation_dir
+
+  # If no directory is given current directory is used as installation one
+  if [ -z "$installation_dir" ]; then
+    installation_dir=($PWD)
+  fi
+
+  tmp_dir="$PWD/tmp/"
+  local_dir="$PWD/.local/"
+  atlas_include_dir="$PWD/.local/ATLAS/include"
+  atlas_lib_dir="$PWD/.local/ATLAS/lib"
 
   cd $installation_dir
 
