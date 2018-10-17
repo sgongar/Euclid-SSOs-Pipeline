@@ -13,8 +13,8 @@ function upgrade_system {
 
 function install_virtualenv {
   # Install virtualenv for deploy a new enviroment
-  virtualenv --python=/usr/bin/python2.7  $installation_dir
-  source /home/user/Work/Projects/pipeline/.venv/bin/activate
+  virtualenv --python=/usr/bin/python2.7  $installation_dir/.venv
+  source $installation_dir/.venv/bin/activate
 }
 
 
@@ -40,12 +40,12 @@ function install_atlas {
   fi
   cd DONE/
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS
+  mkdir $local_dir/ATLAS
   ../configure --shared -Fa alg -fPIC\
   --with-netlib-lapack-tarfile=../../lapack.tgz\
-  --prefix=/home/user/Work/Projects/pipeline/.local/ATLAS
+  --prefix=$local_dir/ATLAS
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS/lib
+  mkdir $local_dir/ATLAS/lib
 
   sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
 
@@ -78,14 +78,14 @@ function install_cdsclient {
   cd cdsclient
 
   # Create a dir for cdsclient installation
-  cdsclient_dir="/home/user/Work/Projects/pipeline/.local/cdsclient"
+  cdsclient_dir="$local_dir/cdsclient"
 
   if [ ! -d $cdsclient_dir ]; then
     mkdir $cdsclient_dir
   fi
 
   # Configure
-  ./configure -prefix=/home/user/Work/Projects/pipeline/.local/cdsclient
+  ./configure -prefix=$local_dir/cdsclient
 
   # Compile them
   make
@@ -133,7 +133,7 @@ function install_scamp {
   cd scamp
 
   # Configure
-  cdsclient_bin_dir="/home/user/Work/Projects/pipeline/.local/cdsclient/bin"
+  cdsclient_bin_dir="$local_dir/cdsclient/bin"
   ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2\
   --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
 
