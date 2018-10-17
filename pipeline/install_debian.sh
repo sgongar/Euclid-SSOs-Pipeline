@@ -7,7 +7,7 @@
 
 
 function upgrade_system {
-  sudo aptitude install $(cat packages.txt) -y
+  sudo apt install -y python-virtualenv
 }
 
 
