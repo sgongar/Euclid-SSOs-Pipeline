@@ -5,6 +5,7 @@
 
 function upgrade_system {
   sudo apt install -y python-virtualenv
+  sudo apt install -y python-dev
 }
 
 
