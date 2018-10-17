@@ -3,9 +3,6 @@
 #
 # Google's Shell Style Guide
 
-# sudo dnf install redhat-rpm-config
-
-
 function upgrade_system {
   sudo apt install -y python-virtualenv
 }
@@ -18,16 +15,15 @@ function install_virtualenv {
 }
 
 
+# Update python modules
 function update_pip {
   pip install --upgrade pip
-  pip install -r modules.txt
+  pip install -r requirements.txt
 }
 
 
+# Install atlas
 function install_atlas {
-  atlas_url="https://downloads.sourceforge.net/project/math-atlas/Stable/3.10.3/atlas3.10.3.tar.bz2?r=&ts=1506698217&use_mirror=10gbps-io"
-  lapack_url="http://www.netlib.org/lapack/lapack-3.7.1.tgz"
-
   wget -O atlas.tar.bz2 $atlas_url
   wget -O lapack.tgz $lapack_url
 
@@ -147,7 +143,7 @@ function install_scamp {
 
 
 function update_enviroment {
-  cp /media/sf_Euclid-tests/pipeline/.bash_profile ~/.bash_profile
+  cp $installation_dir/.bash_profile ~/.bash_profile
   source ~/.bash_profile
 }
 
@@ -160,6 +156,9 @@ function copy_files {
 
 
 function main {
+  atlas_url="https://downloads.sourceforge.net/project/math-atlas/Stable/3.10.3/atlas3.10.3.tar.bz2?r=&ts=1506698217&use_mirror=10gbps-io"
+  lapack_url="http://www.netlib.org/lapack/lapack-3.7.1.tgz"
+
   read -p "Enter installation directory ($PWD): " installation_dir
 
   # If no directory is given current directory is used as installation one
@@ -191,7 +190,7 @@ function main {
   # Compile ATLAS/Lapack library
   cd $tmp_dir
 
-  install_atlas
+  install_atlas $atlas_url $lapack_url
 
   cd ../../
   rm -rf a*
@@ -205,7 +204,7 @@ function main {
   install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
   cd ../
 
-  update_enviroment
+  update_enviroment $installation_dir
   copy_files
 }
 
