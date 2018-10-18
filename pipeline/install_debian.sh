@@ -75,7 +75,7 @@ function install_sextractor {
   # Install Sextractor in local directories
   make install
   # Remove old directory
-  ls
+  cd ../
   rm -r sextractor
 }
 
@@ -102,6 +102,7 @@ function install_scamp {
   # Install Scamp in local directories
   make install
   # Remove old directory
+  cd ../
   rm -r scamp
 }
 
