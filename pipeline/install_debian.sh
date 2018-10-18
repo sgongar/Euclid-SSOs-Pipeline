@@ -68,7 +68,7 @@ function install_sextractor {
   cd sextractor
 
   # Configure
-  ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2 --prefix=$3
+  ./configure --prefix=$1
 
   # Compile Sextractor
   make
@@ -94,8 +94,7 @@ function install_scamp {
 
   # Configure
   cdsclient_bin_dir="$local_dir/cdsclient/bin"
-  ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2\
-  --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
+  ./configure --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$1
 
   # Compile Scamp
   make
@@ -133,8 +132,6 @@ function main {
 
   tmp_dir="$PWD/.tmp/"
   local_dir="$PWD/.local/"
-  atlas_include_dir="$PWD/.local/ATLAS/include"
-  atlas_lib_dir="$PWD/.local/ATLAS/lib"
 
   cd $installation_dir
 
@@ -154,10 +151,10 @@ function main {
   # install_cdsclient
   cd ../
 
-  install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
+  install_sextractor $local_dir
   cd ../
 
-  install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
+  install_scamp $local_dir
   cd ../
 
   update_enviroment $installation_dir
