@@ -6,6 +6,7 @@
 function upgrade_system {
   sudo apt install -y python-virtualenv
   sudo apt install -y python-dev
+  sudo apt install -y gfortran
 }
 
 
@@ -167,7 +168,7 @@ function main {
     installation_dir=($PWD)
   fi
 
-  tmp_dir="$PWD/tmp/"
+  tmp_dir="$PWD/.tmp/"
   local_dir="$PWD/.local/"
   atlas_include_dir="$PWD/.local/ATLAS/include"
   atlas_lib_dir="$PWD/.local/ATLAS/lib"
