@@ -134,8 +134,11 @@ function install_scamp {
 
   # Configure
   cdsclient_bin_dir="$local_dir/cdsclient/bin"
-  ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2\
-  --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
+  # ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2\
+  # --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
+
+  ./configure --with-atlas-incdir=$1 --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
+
 
   # Compile Scamp
   make
