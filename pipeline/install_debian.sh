@@ -7,6 +7,7 @@ function upgrade_system {
   sudo apt install -y python-virtualenv
   sudo apt install -y python-dev
   sudo apt install -y gfortran
+  sudo apt install -y libfftw3-dev
 }
 
 
@@ -114,6 +115,7 @@ function install_sextractor {
   # Install Sextractor in local directories
   make install
   # Remove old directory
+  ls
   rm -r sextractor
 }
 
@@ -175,33 +177,33 @@ function main {
 
   cd $installation_dir
 
-  upgrade_system
-  install_virtualenv
-  update_pip
+  # upgrade_system
+  # install_virtualenv
+  # update_pip
 
   # Checking directories
-  if [ ! -d "$tmp_dir" ]; then
-    mkdir $tmp_dir
-  fi
+  # if [ ! -d "$tmp_dir" ]; then
+  #   mkdir $tmp_dir
+  # fi
 
-  if [ ! -d "$local_dir" ]; then
-    mkdir $local_dir
-  fi
+  # if [ ! -d "$local_dir" ]; then
+  #  mkdir $local_dir
+  # fi
 
   # Install scamp from scratch
   # Compile ATLAS/Lapack library
-  cd $tmp_dir
+  # cd $tmp_dir
 
-  install_atlas $atlas_url $lapack_url
+  # install_atlas $atlas_url $lapack_url
 
-  cd ../../
-  rm -rf a*
+  # cd ../../
+  # rm -rf a*
 
-  install_cdsclient
-  cd ../
+  # install_cdsclient
+  # cd ../
 
-  install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
-  cd ../
+  # install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
+  # cd ../
 
   install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
   cd ../

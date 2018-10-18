@@ -1,19 +1,19 @@
 #!/bin/bash
 # An small script for libraries intallation
-# 
+#
 # Google's Shell Style Guide
 
 # sudo dnf install redhat-rpm-config
 
 
 function upgrade_system {
-  sudo yum -y install $(cat packages.txt)
+  sudo dnf install python-virtualenv
 }
 
 
 function install_virtualenv {
   # Install virtualenv for deploy a new enviroment
-  virtualenv --python=/usr/bin/python2.7  /home/user/Work/Projects/pipeline/.venv
+  virtualenv --python=/usr/bin/python2.7  $installation_dir/.venv
   source /home/user/Work/Projects/pipeline/.venv/bin/activate
 }
 
@@ -56,7 +56,7 @@ function install_atlas {
   # Change ""
   sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
 
-  # make shared 
+  # make shared
   cd ../
 
   # Compile
@@ -86,7 +86,7 @@ function install_cdsclient {
 
   # Configure
   ./configure -prefix=/home/user/Work/Projects/pipeline/.local/cdsclient
-  
+
   # Compile them
   make
   # Perfom an installation to local folder
@@ -154,7 +154,7 @@ function update_enviroment {
 
 # TODO improve format!
 function copy_files {
-  cp -r /media/sf_Euclid-tests/pipeline/* /home/user/Work/Projects/pipeline/ 
+  cp -r /media/sf_Euclid-tests/pipeline/* /home/user/Work/Projects/pipeline/
   cp -r /media/sf_Euclid-tests/pipeline/.settings.ini ~/Work/Projects/pipeline/.settings.ini
 }
 
