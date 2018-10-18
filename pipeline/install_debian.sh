@@ -24,46 +24,6 @@ function update_pip {
   pip install -r requirements.txt
 }
 
-
-# Install atlas
-function install_atlas {
-  wget -O atlas.tar.bz2 $atlas_url
-  wget -O lapack.tgz $lapack_url
-
-  tar -xf atlas.tar.bz2
-  rm atlas.tar.bz2
-
-  cd ATLAS
-  if [ ! -d DONE/ ]; then
-    mkdir DONE
-  fi
-  cd DONE/
-
-  mkdir $local_dir/ATLAS
-  ../configure --shared -Fa alg -fPIC\
-  --with-netlib-lapack-tarfile=../../lapack.tgz\
-  --prefix=$local_dir/ATLAS
-
-  mkdir $local_dir/ATLAS/lib
-
-  sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
-
-  # Get into lib folder and make shared libraries
-  cd lib
-  # Change reference to fortran lib
-  sed -i -e 's/4.8.5/4.8.2/g' Make.inc
-  # Change ""
-  sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
-
-  make shared
-  cd ../
-
-  # Compile
-  make
-  make install
-}
-
-
 function install_cdsclient {
   cdsclient_url="http://cdsarc.u-strasbg.fr/ftp/pub/sw/cdsclient.tar.gz"
   wget -O cdsclient.tar.gz $cdsclient_url
@@ -189,15 +149,6 @@ function main {
   if [ ! -d "$local_dir" ]; then
     mkdir $local_dir
   fi
-
-  # Install scamp from scratch
-  # Compile ATLAS/Lapack library
-  cd $tmp_dir
-
-  install_atlas $atlas_url $lapack_url
-
-  cd ../../
-  rm -rf a*
 
   # install_cdsclient
   cd ../
