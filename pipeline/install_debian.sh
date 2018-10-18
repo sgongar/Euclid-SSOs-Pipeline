@@ -55,7 +55,7 @@ function install_atlas {
   # Change ""
   sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
 
-  # make shared
+  make shared
   cd ../
 
   # Compile
@@ -177,36 +177,36 @@ function main {
 
   cd $installation_dir
 
-  # upgrade_system
-  # install_virtualenv
-  # update_pip
+  upgrade_system
+  install_virtualenv
+  update_pip
 
   # Checking directories
-  # if [ ! -d "$tmp_dir" ]; then
-  #   mkdir $tmp_dir
-  # fi
+  if [ ! -d "$tmp_dir" ]; then
+    mkdir $tmp_dir
+  fi
 
-  # if [ ! -d "$local_dir" ]; then
-  #  mkdir $local_dir
-  # fi
+  if [ ! -d "$local_dir" ]; then
+    mkdir $local_dir
+  fi
 
   # Install scamp from scratch
   # Compile ATLAS/Lapack library
-  # cd $tmp_dir
+  cd $tmp_dir
 
-  # install_atlas $atlas_url $lapack_url
+  install_atlas $atlas_url $lapack_url
 
-  # cd ../../
-  # rm -rf a*
+  cd ../../
+  rm -rf a*
 
   # install_cdsclient
-  # cd ../
+  cd ../
 
   install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
   cd ../
 
-  # install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
-  # cd ../
+  install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
+  cd ../
 
   update_enviroment $installation_dir
   copy_files
