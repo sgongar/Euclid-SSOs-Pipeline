@@ -158,8 +158,15 @@ function update_enviroment {
 
 # TODO improve format!
 function copy_files {
-  cp -r /media/sf_Euclid-tests/pipeline/* /home/user/Work/Projects/pipeline/
-  cp -r /media/sf_Euclid-tests/pipeline/.settings.ini ~/Work/Projects/pipeline/.settings.ini
+  # cp -r /media/sf_Euclid-tests/pipeline/* /home/user/Work/Projects/pipeline/
+  # cp -r /media/sf_Euclid-tests/pipeline/.settings.ini ~/Work/Projects/pipeline/.settings.ini
+
+  # Checking directories
+  if [ ! -d "~/bin/" ]; then
+    mkdir ~/bin/
+  fi
+
+  cp $local_dir/bin/* ~/bin/
 }
 
 
@@ -181,36 +188,36 @@ function main {
 
   cd $installation_dir
 
-  upgrade_system
-  install_virtualenv
-  update_pip
+  # upgrade_system
+  # install_virtualenv
+  # update_pip
 
   # Checking directories
-  if [ ! -d "$tmp_dir" ]; then
-    mkdir $tmp_dir
-  fi
+  # if [ ! -d "$tmp_dir" ]; then
+  #   mkdir $tmp_dir
+  # fi
 
-  if [ ! -d "$local_dir" ]; then
-    mkdir $local_dir
-  fi
+  # if [ ! -d "$local_dir" ]; then
+  #   mkdir $local_dir
+  # fi
 
   # Install scamp from scratch
   # Compile ATLAS/Lapack library
-  cd $tmp_dir
+  # cd $tmp_dir
 
-  install_atlas
+  # install_atlas
 
-  cd ../../
-  rm -rf a*
+  # cd ../../
+  # rm -rf a*
 
-  install_cdsclient
-  cd ../
+  # install_cdsclient
+  # cd ../
 
-  install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
-  cd ../
+  # install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
+  # cd ../
 
-  install_scamp $atlas_include_dir $local_dir
-  cd ../
+  # install_scamp $atlas_include_dir $local_dir
+  # cd ../
 
   update_enviroment $installation_dir
   copy_files
