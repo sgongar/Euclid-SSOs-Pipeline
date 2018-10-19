@@ -167,10 +167,7 @@ function copy_files {
   fi
 
   cp $local_dir/bin/* ~/bin/
-
-  with open("~/.bashrc", "a") as myfile:
-    txt = 'export "PATH+=:$HOME/bin/"''
-    myfile.write(txt)
+  echo "export "PATH+=:$HOME/bin/"" >> ~/.bashrc
 }
 
 
