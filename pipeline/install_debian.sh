@@ -119,7 +119,7 @@ function install_sextractor {
   make install
   # Remove old directory
   cd ../
-  rm -r sextractor
+  rm -rf sextractor
 }
 
 
@@ -146,7 +146,7 @@ function install_scamp {
   make install
   # Remove old directory
   cd ../
-  rm -r scamp
+  rm -rf scamp
 }
 
 
