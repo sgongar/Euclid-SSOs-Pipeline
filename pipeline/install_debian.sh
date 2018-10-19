@@ -42,12 +42,12 @@ function install_atlas {
   fi
   cd DONE/
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS
+  mkdir $local_dir/ATLAS
   ../configure --shared -Fa alg -fPIC\
   --with-netlib-lapack-tarfile=../../lapack.tgz\
-  --prefix=/home/user/Work/Projects/pipeline/.local/ATLAS
+  --prefix=$local_dir/ATLAS
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS/lib
+  mkdir $local_dir/ATLAS/lib
 
   sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
 
@@ -176,6 +176,8 @@ function main {
 
   tmp_dir="$PWD/.tmp/"
   local_dir="$PWD/.local/"
+  atlas_include_dir="$local_dir/ATLAS/include"
+  atlas_lib_dir="$local_dir/ATLAS/lib"
 
   cd $installation_dir
 
