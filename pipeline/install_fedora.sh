@@ -15,14 +15,14 @@ function upgrade_system {
 function install_virtualenv {
   # Install virtualenv for deploy a new enviroment
   virtualenv --python=/usr/bin/python2.7  $installation_dir/.venv
-  source /home/user/Work/Projects/pipeline/.venv/bin/activate
+  source $installation_dir/.venv/bin/activate
 }
 
 
 # Update python modules
 function update_pip {
   pip install --upgrade pip
-  pip install -r modules.txt
+  pip install -r requirements.txt
 }
 
 
