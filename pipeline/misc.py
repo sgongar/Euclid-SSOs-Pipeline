@@ -276,6 +276,9 @@ def extract_settings_elvis():
     elif os_version == 'ubuntu':
         prfs_d['version'] = confmap(cf, "Version")['ubuntu_version']
         prfs_d['home'] = confmap(cf, "HomeDirs")['ubuntu_home']
+    elif os_version == 'debian':
+        prfs_d['version'] = confmap(cf, "Version")['debian_version']
+        prfs_d['home'] = confmap(cf, "HomeDirs")['debian_home']
     else:
         raise BadSettings('Operative system not chosen')
 
