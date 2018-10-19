@@ -203,7 +203,7 @@ function main {
   cd ../../
   rm -rf a*
 
-  # install_cdsclient
+  install_cdsclient
   cd ../
 
   install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
