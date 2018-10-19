@@ -219,7 +219,7 @@ function main {
   # install_scamp $atlas_include_dir $local_dir
   # cd ../
 
-  update_enviroment $installation_dir
+  # update_enviroment $installation_dir
   copy_files
 }
 

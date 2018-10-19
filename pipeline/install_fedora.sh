@@ -8,6 +8,7 @@
 
 function upgrade_system {
   sudo dnf install python-virtualenv
+  sudo dnf install python-devel
 }
 
 
@@ -18,6 +19,7 @@ function install_virtualenv {
 }
 
 
+# Update python modules
 function update_pip {
   pip install --upgrade pip
   pip install -r modules.txt
