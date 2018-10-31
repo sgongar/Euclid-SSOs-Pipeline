@@ -11,7 +11,6 @@ function upgrade_system {
   sudo dnf install python-devel -y
   sudo dnf install gcc-gfortran
   sudo dnf install fftw3-devel -y
-  sudo dnf install
 }
 
 
@@ -182,33 +181,33 @@ function main {
 
   cd $installation_dir
 
-  # upgrade_system
-  # install_virtualenv
-  # update_pip
+  upgrade_system
+  install_virtualenv
+  update_pip
 
   # Checking directories
-  # if [ ! -d "$tmp_dir" ]; then
-  #   mkdir $tmp_dir
-  # fi
+  if [ ! -d "$tmp_dir" ]; then
+    mkdir $tmp_dir
+  fi
 
-  # if [ ! -d "$local_dir" ]; then
-  #   mkdir $local_dir
-  # fi
+  if [ ! -d "$local_dir" ]; then
+    mkdir $local_dir
+  fi
 
   # Install scamp from scratch
   # Compile ATLAS/Lapack library
-  # cd $tmp_dir
+  cd $tmp_dir
 
-  #install_atlas
+  install_atlas
 
-  # cd ../../
-  # rm -rf a*
+  cd ../../
+  rm -rf a*
 
-  # install_cdsclient
-  # cd ../
+  install_cdsclient
+  cd ../
 
-  # install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
-  # cd ../
+  install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
+  cd ../
 
   install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
   cd ../
