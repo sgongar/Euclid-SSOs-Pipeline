@@ -42,12 +42,12 @@ function install_atlas {
   fi
   cd DONE/
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS
+  mkdir $local_dir/ATLAS
   ../configure --shared -Fa alg -fPIC\
   --with-netlib-lapack-tarfile=../../lapack.tgz\
-  --prefix=/home/user/Work/Projects/pipeline/.local/ATLAS
+  --prefix=$local_dir/ATLAS
 
-  mkdir /home/user/Work/Projects/pipeline/.local/ATLAS/lib
+  mkdir $local_dir/ATLAS/lib
 
   sed -i -e 's/"-rpath-link $(LIBINSTdir)"/-rpath-link $(LIBINSTdir)/g' Makefile
 
@@ -162,11 +162,20 @@ function copy_files {
 
 
 function main {
-  tmp_dir="/home/user/Work/Projects/pipeline/tmp/"
-  local_dir="/home/user/Work/Projects/pipeline/.local/"
-  installation_dir="/media/sf_Euclid-tests/pipeline/"
-  atlas_include_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/include"
-  atlas_lib_dir="/home/user/Work/Projects/pipeline/.local/ATLAS/lib"
+  atlas_url="https://downloads.sourceforge.net/project/math-atlas/Stable/3.10.3/atlas3.10.3.tar.bz2?r=&ts=1506698217&use_mirror=10gbps-io"
+  lapack_url="http://www.netlib.org/lapack/lapack-3.7.1.tgz"
+
+  read -p "Enter installation directory ($PWD): " installation_dir
+
+  # If no directory is given current directory is used as installation one
+  if [ -z "$installation_dir" ]; then
+    installation_dir=($PWD)
+    fi
+
+  tmp_dir="$PWD/.tmp/"
+  local_dir="$PWD/.local/"
+  atlas_include_dir="$local_dir/ATLAS/include"
+  atlas_lib_dir="$local_dir/ATLAS/lib"
 
   cd $installation_dir
 
