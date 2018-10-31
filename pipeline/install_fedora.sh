@@ -7,8 +7,9 @@
 
 
 function upgrade_system {
-  sudo dnf install python-virtualenv
-  sudo dnf install python-devel
+  sudo dnf install python-virtualenv -y
+  sudo dnf install python-devel -y
+  sudo dnf install fftw3-devel -y
 }
 
 
@@ -80,14 +81,14 @@ function install_cdsclient {
   cd cdsclient
 
   # Create a dir for cdsclient installation
-  cdsclient_dir="/home/user/Work/Projects/pipeline/.local/cdsclient"
+  cdsclient_dir="$local_dir/cdsclient"
 
   if [ ! -d $cdsclient_dir ]; then
     mkdir $cdsclient_dir
   fi
 
   # Configure
-  ./configure -prefix=/home/user/Work/Projects/pipeline/.local/cdsclient
+  ./configure -prefix=$local_dir/cdsclient
 
   # Compile them
   make
@@ -135,9 +136,9 @@ function install_scamp {
   cd scamp
 
   # Configure
-  cdsclient_bin_dir="/home/user/Work/Projects/pipeline/.local/cdsclient/bin"
-  ./configure --with-atlas-incdir=$1 --with-atlas-libdir=$2\
-  --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$3
+  cdsclient_bin_dir="$local_dir/cdsclient/bin"
+  ./configure --with-atlas-incdir=$1\
+  --with-cdsclient-dir=$cdsclient_bin_dir --prefix=$2
 
   # Compile Scamp
   make
@@ -148,16 +149,15 @@ function install_scamp {
 }
 
 
-function update_enviroment {
-  cp /media/sf_Euclid-tests/pipeline/.bash_profile ~/.bash_profile
-  source ~/.bash_profile
-}
-
-
-# TODO improve format!
 function copy_files {
-  cp -r /media/sf_Euclid-tests/pipeline/* /home/user/Work/Projects/pipeline/
-  cp -r /media/sf_Euclid-tests/pipeline/.settings.ini ~/Work/Projects/pipeline/.settings.ini
+  # Checking directories
+  if [ ! -d "~/bin/" ]; then
+    mkdir ~/bin/
+  fi
+
+  cp $local_dir/bin/* ~/bin/
+  echo "export "PATH+=:$HOME/bin/"" >> ~/.bashrc
+  source ~/.bashrc
 }
 
 
@@ -207,10 +207,9 @@ function main {
   install_sextractor $atlas_include_dir $atlas_lib_dir $local_dir
   cd ../
 
-  install_scamp $atlas_include_dir $atlas_lib_dir $local_dir
+  install_scamp $atlas_include_dir $local_dir
   cd ../
 
-  update_enviroment
   copy_files
 }
 
