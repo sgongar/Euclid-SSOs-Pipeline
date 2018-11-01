@@ -79,8 +79,8 @@ def get_os():
         os_system = 'test'
     elif 'debian' in platform.platform():
         os_system = 'debian'
-    elif 'Ubuntu' in platform.platform():
-        os_system = 'ubuntu'
+    elif 'Microsoft' in platform.platform():
+        os_system = 'windows'
     elif 'fedora-27' in platform.platform():
         os_system = 'fedora'
     elif 'fedora-19' in platform.platform():
@@ -273,9 +273,9 @@ def extract_settings_elvis():
     elif os_version == 'cab':
         prfs_d['version'] = conf_map(cf, "Version")['cab_version']
         prfs_d['home'] = conf_map(cf, "HomeDirs")['cab_home']
-    elif os_version == 'ubuntu':
-        prfs_d['version'] = conf_map(cf, "Version")['ubuntu_version']
-        prfs_d['home'] = conf_map(cf, "HomeDirs")['ubuntu_home']
+    elif os_version == 'windows':
+        prfs_d['version'] = conf_map(cf, "Version")['windows_version']
+        prfs_d['home'] = conf_map(cf, "HomeDirs")['windows_home']
     elif os_version == 'debian':
         prfs_d['version'] = conf_map(cf, "Version")['debian_version']
         prfs_d['home'] = conf_map(cf, "HomeDirs")['debian_home']
