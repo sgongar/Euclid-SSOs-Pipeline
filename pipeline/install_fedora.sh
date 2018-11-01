@@ -3,8 +3,6 @@
 #
 # Google's Shell Style Guide
 
-# sudo dnf install redhat-rpm-config
-
 
 function upgrade_system {
   sudo dnf install python-virtualenv -y

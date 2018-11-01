@@ -81,7 +81,7 @@ def get_os():
         os_system = 'debian'
     elif 'Ubuntu' in platform.platform():
         os_system = 'ubuntu'
-    elif 'fedora-26' in platform.platform():
+    elif 'fedora-27' in platform.platform():
         os_system = 'fedora'
     elif 'fedora-19' in platform.platform():
         os_system = 'cab'
@@ -279,6 +279,9 @@ def extract_settings_elvis():
     elif os_version == 'debian':
         prfs_d['version'] = conf_map(cf, "Version")['debian_version']
         prfs_d['home'] = conf_map(cf, "HomeDirs")['debian_home']
+    elif os_version == 'fedora':
+        prfs_d['version'] = conf_map(cf, "Version")['fedora_version']
+        prfs_d['home'] = conf_map(cf, "HomeDirs")['fedora_home']
     else:
         raise BadSettings('Operative system not chosen')
 
