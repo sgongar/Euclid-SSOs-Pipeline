@@ -67,10 +67,6 @@ class SextractorELViS:
             if fits_[-6:-5] == 't':
                 fits_files.append(fits_)
 
-        print(fits_files)
-
-        raise Exception
-
         for image_idx in range(0, len(fits_files),
                                self.prfs_d['cores_number']):
             try:
