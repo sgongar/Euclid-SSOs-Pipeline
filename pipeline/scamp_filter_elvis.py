@@ -104,7 +104,7 @@ class ScampFilterELViS:  # TODO Split scamp_filter method into single methods
         for x_ in range(1, 7, 1):
             for y_ in range(1, 7, 1):
                 for d_ in range(1, 5, 1):
-                    cat_name = 'CCD_x{}_y{}_d{}.cat'.format(x_, y_, d_)
+                    cat_name = 'CCD_x{}_y{}_d{}_t.cat'.format(x_, y_, d_)
                     cats.append(cat_name)
 
         return cats[cat_n]

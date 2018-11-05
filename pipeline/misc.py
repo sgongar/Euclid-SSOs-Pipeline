@@ -267,6 +267,9 @@ def extract_settings_elvis():
     prfs_d = {}
     os_version = get_os()
 
+    print('os_version is {}'.format(os_version))
+    print(cf)
+
     if os_version == 'centos':
         prfs_d['version'] = conf_map(cf, "Version")['centos_version']
         prfs_d['home'] = conf_map(cf, "HomeDirs")['centos_home']

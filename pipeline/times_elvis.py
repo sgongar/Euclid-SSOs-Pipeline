@@ -118,8 +118,9 @@ def change_times_thread(prfs_d, fits_image):
                                                         header['MJD-OBS'],
                                                         dither))
 
-    fits.writeto('{}/{}'.format(prfs_d['fits_dir'], fits_image),
-                 data, header, clobber=True)
+    print('fits_image {}'.format(fits_image))
+    fits.writeto('{}/{}_t.fits'.format(prfs_d['fits_dir'], fits_image[:-5]),
+                 data, header)
 
     return True
 

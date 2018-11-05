@@ -47,7 +47,7 @@ class ScampELViS:
         self.logger.info('Scamp process')
 
         scmp_1 = 'scamp -c {}'.format(self.prfs_d['conf_scamp'])
-        scmp_2 = ' {}/*.cat'.format(self.prfs_d['fits_dir'])
+        scmp_2 = ' {}/*t.cat'.format(self.prfs_d['fits_dir'])
         scmp_3 = ' -ASTREFCAT_NAME {}/stars_catalogue.cat'.format(self.prfs_d['references'])
         scmp_4 = ' -PIXSCALE_MAXERR {}'.format(self.scmp_d['pixscale_maxerr'])
         scmp_5 = ' -POSANGLE_MAXERR {}'.format(self.scmp_d['posangle_maxerr'])
